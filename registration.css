@@ -2,137 +2,119 @@
    GOOGLE FONT
 =========================== */
 
-@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap');
+@import url("https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap");
 
 /* ===========================
    GLOBAL
 =========================== */
 
-*{
-    margin:0;
-    padding:0;
-    box-sizing:border-box;
-    font-family:'Poppins',sans-serif;
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  font-family: "Poppins", sans-serif;
 }
 
-body{
+body {
+  background: #f5f7fb;
 
-    background:#f5f7fb;
+  display: flex;
 
-    display:flex;
+  justify-content: center;
 
-    justify-content:center;
+  align-items: center;
 
-    align-items:center;
+  min-height: 100vh;
 
-    min-height:100vh;
-
-    padding:40px;
-
+  padding: 40px;
 }
 
 /* ===========================
    FORM CONTAINER
 =========================== */
 
-.container{
+.container {
+  width: 100%;
 
-    width:100%;
+  display: flex;
 
-    display:flex;
-
-    justify-content:center;
-
+  justify-content: center;
 }
 
-.form-box{
+.form-box {
+  width: 100%;
 
-    width:100%;
+  max-width: 950px;
 
-    max-width:950px;
+  background: #ffffff;
 
-    background:#ffffff;
+  padding: 40px;
 
-    padding:40px;
+  border-radius: 15px;
 
-    border-radius:15px;
-
-    box-shadow:0 10px 30px rgba(0,0,0,.08);
-
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.08);
 }
 
-.form-box h1{
+.form-box h1 {
+  color: #0056d2;
 
-    color:#0056d2;
+  text-align: center;
 
-    text-align:center;
+  margin-bottom: 10px;
 
-    margin-bottom:10px;
+  font-size: 32px;
 
-    font-size:32px;
-
-    font-weight:700;
-
+  font-weight: 700;
 }
 
-.form-box p{
+.form-box p {
+  text-align: center;
 
-    text-align:center;
+  color: #0b0b0b;
 
-    color:#0b0b0b;
+  margin-bottom: 35px;
 
-    margin-bottom:35px;
+  font-size: 20px;
 
-    font-size:20px;
-
-    font-weight:700;
-
+  font-weight: 700;
 }
 
 /* ===========================
    FORM GRID
 =========================== */
 
-.form-grid{
+.form-grid {
+  display: grid;
 
-    display:grid;
+  grid-template-columns: repeat(2, 1fr);
 
-    grid-template-columns:repeat(2,1fr);
-
-    gap:25px;
-
+  gap: 25px;
 }
 
-.input-group{
+.input-group {
+  display: flex;
 
-    display:flex;
+  flex-direction: column;
 
-    flex-direction:column;
+  font-size: 20px;
 
-    font-size:20px;
-
-    font-weight:700;
-
+  font-weight: 700;
 }
 
-.full-width{
-
-    grid-column:1/3;
-
+.full-width {
+  grid-column: 1/3;
 }
 
 /* ===========================
    LABEL
 =========================== */
 
-label{
+label {
+  margin-bottom: 8px;
 
-    margin-bottom:8px;
+  font-weight: 600;
 
-    font-weight:600;
-
-    color:#333;
-
+  color: #333;
 }
 
 /* ===========================
@@ -140,160 +122,126 @@ label{
 =========================== */
 
 input,
-select{
+select {
+  width: 100%;
 
-    width:100%;
+  max-width: 100%;
 
-    max-width:100%;
+  padding: 13px;
 
-    padding:13px;
+  border: 1px solid #dcdcdc;
 
-    border:1px solid #dcdcdc;
+  border-radius: 8px;
 
-    border-radius:8px;
+  font-size: 15px;
 
-    font-size:15px;
+  outline: none;
 
-    outline:none;
-
-    transition:.3s;
-
+  transition: 0.3s;
 }
 
 input:focus,
-select:focus{
+select:focus {
+  border-color: #0056d2;
 
-    border-color:#0056d2;
-
-    box-shadow:0 0 8px rgba(0,86,210,.2);
-
+  box-shadow: 0 0 8px rgba(0, 86, 210, 0.2);
 }
 
 /* ===========================
    BUTTONS
 =========================== */
 
-.button-group{
+.button-group {
+  margin-top: 35px;
 
-    margin-top:35px;
+  display: flex;
 
-    display:flex;
+  justify-content: center;
 
-    justify-content:center;
-
-    gap:20px;
-
+  gap: 20px;
 }
 
 .register-btn,
-.reset-btn{
+.reset-btn {
+  padding: 14px 35px;
 
-    padding:14px 35px;
+  border: none;
 
-    border:none;
+  border-radius: 8px;
 
-    border-radius:8px;
+  font-size: 16px;
 
-    font-size:16px;
+  cursor: pointer;
 
-    cursor:pointer;
-
-    transition:.3s;
-
+  transition: 0.3s;
 }
 
-.register-btn{
+.register-btn {
+  background: #0056d2;
 
-    background:#0056d2;
-
-    color:white;
-
+  color: white;
 }
 
-.register-btn:hover{
+.register-btn:hover {
+  background: #0040a0;
 
-    background:#0040a0;
-
-    transform:translateY(-2px);
-
+  transform: translateY(-2px);
 }
 
-.reset-btn{
+.reset-btn {
+  background: #e5e7eb;
 
-    background:#e5e7eb;
-
-    color:#333;
-
+  color: #333;
 }
 
-.reset-btn:hover{
+.reset-btn:hover {
+  background: #d1d5db;
 
-    background:#d1d5db;
-
-    transform:translateY(-2px);
-
+  transform: translateY(-2px);
 }
 
 /* ===========================
    RESPONSIVE
 =========================== */
 
-@media(max-width:768px){
+@media (max-width: 768px) {
+  body {
+    padding: 10px;
+  }
 
-    body{
+  .form-box {
+    padding: 10px;
 
-        padding:10px;
+    overflow: hidden;
+  }
 
-    }
+  .form-grid {
+    grid-template-columns: 1fr;
+  }
 
-    .form-box{
+  .input-group {
+    width: 100%;
 
-        padding:10px;
+    min-width: 0;
+  }
 
-        overflow:hidden;
+  input,
+  select {
+    width: 100%;
 
-    }
+    max-width: 100%;
+  }
 
-    .form-grid{
+  .full-width {
+    grid-column: auto;
+  }
 
-        grid-template-columns:1fr;
+  .button-group {
+    flex-direction: column;
+  }
 
-    }
-
-    .input-group{
-
-        width:100%;
-
-        min-width:0;
-
-    }
-
-    input,
-    select{
-
-        width:100%;
-
-        max-width:100%;
-
-    }
-
-    .full-width{
-
-        grid-column:auto;
-
-    }
-
-    .button-group{
-
-        flex-direction:column;
-
-    }
-
-    .register-btn,
-    .reset-btn{
-
-        width:100%;
-
-    }
-
+  .register-btn,
+  .reset-btn {
+    width: 100%;
+  }
 }
