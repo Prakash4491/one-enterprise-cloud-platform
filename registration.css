@@ -69,15 +69,23 @@ body{
 
     margin-bottom:10px;
 
+    font-size:32px;
+
+    font-weight:700;
+
 }
 
 .form-box p{
 
     text-align:center;
 
-    color:#666;
+    color:#0b0b0b;
 
     margin-bottom:35px;
+
+    font-size:20px;
+
+    font-weight:700;
 
 }
 
@@ -100,6 +108,10 @@ body{
     display:flex;
 
     flex-direction:column;
+
+    font-size:20px;
+
+    font-weight:700;
 
 }
 
@@ -222,7 +234,7 @@ select:focus{
    RESPONSIVE
 =========================== */
 
-@media(max-width:768px){
+@media(max-width:780px){
 
     .form-box{
 
