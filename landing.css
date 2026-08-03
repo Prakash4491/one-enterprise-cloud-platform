@@ -1,12 +1,6 @@
-/* =========================
-   GOOGLE FONT
-========================= */
-
 @import url("https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap");
 
-/* =========================
-   GLOBAL
-========================= */
+/* Global */
 
 * {
   margin: 0;
@@ -21,9 +15,7 @@ body {
   line-height: 1.6;
 }
 
-/* =========================
-   HEADER
-========================= */
+/* Header */
 
 header {
   position: sticky;
@@ -108,9 +100,7 @@ nav a:hover {
   background: #003f9f;
 }
 
-/* =========================
-   HERO
-========================= */
+/* Hero */
 
 .hero {
   min-height: 85vh;
@@ -175,9 +165,7 @@ nav a:hover {
 .secondary-btn:hover {
   transform: translateY(-3px);
 }
-/* =========================
-   MODULES
-========================= */
+/* Modules */
 
 .modules {
   padding: 80px 8%;
@@ -237,9 +225,7 @@ nav a:hover {
   color: #0e0d0d;
 }
 
-/* =========================
-   TECHNOLOGY
-========================= */
+/* Technology */
 
 .technology {
   padding: 70px 8%;
@@ -287,9 +273,7 @@ nav a:hover {
   transform: scale(1.05);
 }
 
-/* =========================
-   FOOTER
-========================= */
+/* Footer */
 
 footer {
   background: #1b1b1b;
@@ -323,9 +307,7 @@ footer {
   color: #4f8cff;
 }
 
-/* =========================
-   RESPONSIVE
-========================= */
+/* Mobile View */
 
 @media (max-width: 992px) {
   header {
