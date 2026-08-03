@@ -234,17 +234,42 @@ select:focus{
    RESPONSIVE
 =========================== */
 
-@media(max-width:780px){
+@media(max-width:768px){
+
+    body{
+
+        padding:15px;
+
+    }
 
     .form-box{
 
-        padding:25px;
+        padding:20px;
+
+        overflow:hidden;
 
     }
 
     .form-grid{
 
         grid-template-columns:1fr;
+
+    }
+
+    .input-group{
+
+        width:100%;
+
+        min-width:0;
+
+    }
+
+    input,
+    select{
+
+        width:100%;
+
+        max-width:100%;
 
     }
 
