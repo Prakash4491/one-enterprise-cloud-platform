@@ -1,0 +1,86 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
+    <title>Dashboard</title>
+
+    <link rel="stylesheet" href="css/dashboard.css" />
+  </head>
+
+  <body>
+    <header>
+      <div class="logo">
+        <img src="assets/images/stackly.png" alt="Stackly Logo" />
+
+        <h2>One Enterprise Cloud Platform</h2>
+      </div>
+
+      <button id="logoutBtn">Logout</button>
+    </header>
+    <section class="welcome">
+      <h1>
+        Welcome,
+        <span id="username"></span>
+      </h1>
+
+      <p>Manage your enterprise applications from one place.</p>
+    </section>
+
+    <section class="modules">
+      <a href="employees.html" class="card-link">
+        <div class="card">
+          <div class="icon">👨‍💼</div>
+
+          <h3>Employee Management</h3>
+
+          <p>Manage employee records and profiles.</p>
+        </div>
+      </a>
+
+      <div class="card">
+        <div class="icon">🕒</div>
+
+        <h3>Attendance</h3>
+
+        <p>Track employee attendance.</p>
+      </div>
+
+      <div class="card">
+        <div class="icon">📅</div>
+
+        <h3>Leave</h3>
+
+        <p>Leave requests and approvals.</p>
+      </div>
+
+      <div class="card">
+        <div class="icon">💰</div>
+
+        <h3>Payroll</h3>
+
+        <p>Salary processing and reports.</p>
+      </div>
+
+      <div class="card">
+        <div class="icon">🤝</div>
+
+        <h3>CRM</h3>
+
+        <p>Customer relationship management.</p>
+      </div>
+
+      <div class="card">
+        <div class="icon">📊</div>
+
+        <h3>Finance</h3>
+
+        <p>Financial reports and analytics.</p>
+      </div>
+    </section>
+
+    <script src="js/dashboard.js"></script>
+  </body>
+</html>

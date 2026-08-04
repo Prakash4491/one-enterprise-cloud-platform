@@ -1,0 +1,69 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
+    <title>Employee Login</title>
+
+    <link rel="stylesheet" href="css/login.css" />
+  </head>
+
+  <body>
+    <header class="login-header">
+      <a href="landing.html" class="home-btn">🏠 Home</a>
+    </header>
+
+    <div class="login-container">
+      <div class="login-card">
+        <div class="logo">
+          <img src="assets/images/stackly.png" alt="Stackly Logo" />
+        </div>
+
+        <h1>Enterprise Cloud Platform</h1>
+
+        <p>Employee Login</p>
+
+        <form id="loginForm">
+          <div class="input-group">
+            <label>Employee ID / Email</label>
+
+            <input
+              type="text"
+              id="username"
+              placeholder="Enter Employee ID or Email"
+              required
+            />
+          </div>
+
+          <div class="input-group">
+            <label>Password</label>
+
+            <input
+              type="password"
+              id="password"
+              placeholder="Enter Password"
+              required
+            />
+          </div>
+
+          <div class="options">
+            <label class="remember">
+              <input type="checkbox" />
+
+              Remember Me
+            </label>
+
+            <a href="#">Forgot Password?</a>
+          </div>
+
+          <button type="submit" class="login-btn">Login</button>
+
+          <p id="message"></p>
+        </form>
+      </div>
+    </div>
+
+    <script src="js/login.js"></script>
+  </body>
+</html>
