@@ -1,0 +1,109 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
+    <title>Attendance Management</title>
+
+    <link rel="stylesheet" href="css/style.css" />
+    <link rel="stylesheet" href="css/attendance.css" />
+  </head>
+
+  <body>
+
+    <header class="header">
+      <h1>Attendance Management</h1>
+
+      <a href="dashboard.html" class="back-btn"> ⬅️ Dashboard </a>
+    </header>
+
+    <div class="date-container">
+      <h3 id="currentDate"></h3>
+    </div>
+
+    <section class="summary-container">
+      <div class="summary-card total-card">
+        <h2 id="totalCount">0</h2>
+        <p>Total Employees</p>
+      </div>
+
+      <div class="summary-card present-card">
+        <h2 id="presentCount">0</h2>
+        <p>Present</p>
+      </div>
+
+      <div class="summary-card absent-card">
+        <h2 id="absentCount">0</h2>
+        <p>Absent</p>
+      </div>
+
+      <div class="summary-card halfday-card">
+        <h2 id="halfDayCount">0</h2>
+        <p>Half Day</p>
+      </div>
+
+      <div class="summary-card wfh-card">
+        <h2 id="wfhCount">0</h2>
+        <p>Work From Home</p>
+      </div>
+    </section>
+
+    <section class="filter-section">
+      <input
+        type="text"
+        id="searchEmployee"
+        placeholder="Search by Employee Name or ID"
+      />
+
+      <select id="departmentFilter">
+        <option value="All">All Departments</option>
+
+        <option value="Development">Development</option>
+
+        <option value="HR">HR</option>
+
+        <option value="Finance">Finance</option>
+
+        <option value="CRM">CRM</option>
+
+        <option value="ERP">ERP</option>
+      </select>
+
+      <select id="statusFilter">
+        <option value="All">All Status</option>
+
+        <option value="Present">Present</option>
+
+        <option value="Absent">Absent</option>
+
+        <option value="Half Day">Half Day</option>
+
+        <option value="WFH">Work From Home</option>
+      </select>
+    </section>
+
+    <div class="table-container">
+      <table>
+        <thead>
+          <tr>
+            <th>Employee ID</th>
+
+            <th>Name</th>
+
+            <th>Department</th>
+
+            <th>Attendance</th>
+
+            <th>Action</th>
+          </tr>
+        </thead>
+
+        <tbody id="attendanceTableBody"></tbody>
+      </table>
+    </div>
+
+    <script src="js/attendance.js"></script>
+  </body>
+</html>

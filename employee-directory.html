@@ -1,0 +1,81 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
+    <title>Employee Directory</title>
+
+    <link rel="stylesheet" href="css/style.css" />
+    <link rel="stylesheet" href="css/employee-directory.css" />
+  </head>
+
+  <body>
+    <header>
+      <h1>Employee Directory</h1>
+
+      <a href="emp-mng.html" class="back-btn">⬅️ Back</a>
+    </header>
+
+<section class="search-section">
+
+    <input
+        type="text"
+        id="searchInput"
+        placeholder="Search by Name or ID">
+
+    <select id="departmentFilter">
+
+        <option value="All">All Departments</option>
+        <option value="Development">Development</option>
+        <option value="HR">HR</option>
+        <option value="Finance">Finance</option>
+        <option value="CRM">CRM</option>
+        <option value="ERP">ERP</option>
+
+    </select>
+
+    <select id="designationFilter">
+
+        <option value="All">All Designations</option>
+        <option value="Full Stack Developer">Full Stack Developer</option>
+        <option value="HR Executive">HR Executive</option>
+        <option value="Accountant">Accountant</option>
+        <option value="CRM Executive">CRM Executive</option>
+
+    </select>
+
+    <select id="statusFilter">
+
+        <option value="All">All Status</option>
+        <option value="Active">Active</option>
+        <option value="Inactive">Inactive</option>
+
+    </select>
+
+    <select id="sortOption">
+
+        <option value="">Sort By</option>
+        <option value="nameAsc">Name (A-Z)</option>
+        <option value="nameDesc">Name (Z-A)</option>
+        <option value="idAsc">Employee ID (Ascending)</option>
+        <option value="idDesc">Employee ID (Descending)</option>
+
+    </select>
+
+    <button id="resetBtn">
+        Reset
+    </button>
+
+</section>
+
+    <section
+      class="employee-container"
+      id="employeeContainer">
+    </section>
+
+    <script src="js/employee-directory.js"></script>
+
+  </body>
+</html>

@@ -1,0 +1,233 @@
+body {
+  background: #f4f7fb;
+}
+
+.header {
+  background: #0056d2;
+  color: white;
+  padding: 20px 40px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.header h1 {
+  font-size: 30px;
+}
+
+.back-btn {
+  text-decoration: none;
+  color: white;
+  background: #0040a0;
+  padding: 12px 20px;
+  border-radius: 8px;
+  transition: 0.3s;
+}
+
+.back-btn:hover {
+  background: #00307c;
+}
+
+.date-container {
+  text-align: center;
+  margin: 25px 0;
+}
+
+.date-container h3 {
+  color: #555;
+}
+
+.summary-container {
+  width: 95%;
+  margin: auto;
+  display: grid;
+  grid-template-columns: repeat(5, 1fr);
+  gap: 20px;
+}
+
+.summary-card {
+  background: white;
+  padding: 20px;
+  text-align: center;
+  border-radius: 12px;
+  box-shadow: 0 8px 20px rgba(0, 0, 0, 0.08);
+}
+
+.summary-card h2 {
+  font-size: 34px;
+  margin-bottom: 10px;
+}
+
+.summary-card p {
+  font-weight: 600;
+}
+
+.present-card {
+  border-top: 5px solid #22c55e;
+}
+
+.absent-card {
+  border-top: 5px solid #ef4444;
+}
+
+.halfday-card {
+  border-top: 5px solid orange;
+}
+
+.wfh-card {
+  border-top: 5px solid #3b82f6;
+}
+
+.filter-section {
+  width: 95%;
+  margin: 35px auto;
+  display: grid;
+  grid-template-columns: 2fr 1fr 1fr;
+  gap: 20px;
+}
+
+.filter-section input,
+.filter-section select {
+  flex: 1;
+  padding: 14px;
+  border-radius: 8px;
+  border: 1px solid #ccc;
+  outline: none;
+}
+
+.filter-section input:focus,
+.filter-section select:focus {
+  border-color: #0056d2;
+}
+
+.table-container {
+  width: 95%;
+  margin: auto;
+  overflow-x: auto;
+}
+
+table {
+  width: 100%;
+  border-collapse: collapse;
+  background: white;
+  border-radius: 10px;
+  overflow: hidden;
+}
+
+thead {
+  background: #0056d2;
+  color: white;
+}
+
+th {
+  padding: 18px;
+}
+
+td {
+  padding: 15px;
+  text-align: center;
+  border-bottom: 1px solid #eee;
+}
+
+.attendance-select {
+  padding: 10px;
+  border-radius: 8px;
+  border: 1px solid #ccc;
+}
+
+.save-btn {
+  background: #27df42;
+  color: white;
+  border: none;
+  padding: 10px 18px;
+  border-radius: 8px;
+  cursor: pointer;
+  transition: 0.3s;
+}
+
+.save-btn:hover {
+  background: #003fa3;
+}
+
+.update-btn {
+  background: #f59e0b;
+  color: white;
+  border: none;
+  padding: 8px 14px;
+  border-radius: 6px;
+  cursor: pointer;
+  margin-left: 8px;
+}
+
+.update-btn:hover {
+  background: #d97706;
+}
+
+.reset-btn {
+  background: #ef4444;
+  color: white;
+  border: none;
+  padding: 8px 14px;
+  border-radius: 6px;
+  cursor: pointer;
+  margin-left: 8px;
+}
+
+.reset-btn:hover {
+  background: #dc2626;
+}
+
+.badge {
+  padding: 8px 8px;
+  border-radius: 10px;
+  color: white;
+  font-size: 14px;
+}
+.total-card {
+  background: #ac57ea;
+  border: 6px solid #0d0d0d;
+}
+
+.present-card {
+  background: #95f3c7;
+  border: 6px solid #22c55e;
+}
+
+.absent-card {
+  background: #f09797;
+  border: 6px solid #ef4444;
+}
+
+.halfday-card {
+  background: #edbc80;
+  border: 6px solid orange;
+}
+
+.wfh-card {
+  background: #6ba7f5;
+  border: 6px solid #3b82f6;
+}
+
+@media (max-width: 900px) {
+  .summary-container {
+    grid-template-columns: repeat(2, 1fr);
+  }
+
+  .filter-section {
+    grid-template-columns: 1fr;
+  }
+}
+
+@media (max-width: 600px) {
+  .summary-container {
+    grid-template-columns: 1fr;
+  }
+
+  .header {
+    flex-direction: column;
+
+    gap: 15px;
+
+    text-align: center;
+  }
+}
