@@ -1,0 +1,649 @@
+/* ================================= */
+/* PROFILE HEADER */
+/* ================================= */
+
+.profile-header {
+
+    background: white;
+
+    padding: 25px 50px;
+
+    display: flex;
+
+    justify-content: space-between;
+
+    align-items: center;
+
+    border-bottom: 1px solid #e5e7eb;
+
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.05);
+
+}
+
+
+.profile-header h1 {
+
+    margin: 0;
+
+    color: #1e3a8a;
+
+    font-size: 28px;
+
+}
+
+
+.profile-header p {
+
+    margin: 5px 0 0;
+
+    color: #64748b;
+
+}
+
+
+.header-actions {
+
+    display: flex;
+
+    gap: 10px;
+
+    align-items: center;
+
+}
+
+
+
+/* ================================= */
+/* BUTTONS */
+/* ================================= */
+
+.print-btn,
+.download-btn,
+.logout-btn {
+
+    border: none;
+
+    padding: 11px 18px;
+
+    border-radius: 7px;
+
+    cursor: pointer;
+
+    font-size: 14px;
+
+    font-weight: 600;
+
+}
+
+
+.print-btn {
+
+    background: #2563eb;
+
+    color: white;
+
+}
+
+
+.download-btn {
+
+    background: #16a34a;
+
+    color: white;
+
+}
+
+
+.logout-btn {
+
+    background: #dc2626;
+
+    color: white;
+
+}
+
+
+.print-btn:hover,
+.download-btn:hover,
+.logout-btn:hover {
+
+    opacity: 0.9;
+
+}
+
+
+
+/* ================================= */
+/* MAIN CONTAINER */
+/* ================================= */
+
+.profile-container {
+
+    max-width: 1200px;
+
+    margin: 30px auto;
+
+    padding: 0 20px;
+
+}
+
+
+
+/* ================================= */
+/* SECTIONS */
+/* ================================= */
+
+.profile-section,
+.reports-section,
+.leave-section,
+.my-leaves-section {
+
+    background: white;
+
+    padding: 30px;
+
+    margin-bottom: 25px;
+
+    border-radius: 12px;
+
+    box-shadow: 0 3px 12px rgba(0, 0, 0, 0.06);
+
+}
+
+
+.section-header {
+
+    margin-bottom: 25px;
+
+}
+
+
+.section-header h2 {
+
+    margin: 0;
+
+    color: #1e293b;
+
+    font-size: 23px;
+
+}
+
+
+.section-header p {
+
+    margin-top: 6px;
+
+    color: #64748b;
+
+}
+
+
+
+/* ================================= */
+/* PROFILE GRID */
+/* ================================= */
+
+.profile-grid {
+
+    display: grid;
+
+    grid-template-columns:
+        repeat(3, 1fr);
+
+    gap: 18px;
+
+}
+
+
+.profile-item {
+
+    padding: 18px;
+
+    background: #f8fafc;
+
+    border: 1px solid #e2e8f0;
+
+    border-radius: 8px;
+
+}
+
+
+.profile-item span {
+
+    display: block;
+
+    font-size: 13px;
+
+    color: #64748b;
+
+    margin-bottom: 7px;
+
+}
+
+
+.profile-item strong {
+
+    display: block;
+
+    color: #1e293b;
+
+    font-size: 16px;
+
+    word-break: break-word;
+
+}
+
+
+
+/* ================================= */
+/* REPORT CARDS */
+/* ================================= */
+
+.report-grid {
+
+    display: grid;
+
+    grid-template-columns:
+        repeat(4, 1fr);
+
+    gap: 20px;
+
+}
+
+
+.report-card {
+
+    padding: 25px;
+
+    border-radius: 10px;
+
+    background: #f8fafc;
+
+    border: 1px solid #e2e8f0;
+
+    text-align: center;
+
+}
+
+
+.report-icon {
+
+    font-size: 30px;
+
+    margin-bottom: 10px;
+
+}
+
+
+.report-card p {
+
+    margin: 0;
+
+    color: #64748b;
+
+    font-size: 14px;
+
+}
+
+
+.report-card h2 {
+
+    margin: 10px 0 0;
+
+    font-size: 28px;
+
+    color: #1e3a8a;
+
+}
+
+
+
+/* ================================= */
+/* LEAVE FORM */
+/* ================================= */
+
+.leave-form-grid {
+
+    display: grid;
+
+    grid-template-columns:
+        repeat(2, 1fr);
+
+    gap: 20px;
+
+}
+
+
+.input-group {
+
+    display: flex;
+
+    flex-direction: column;
+
+}
+
+
+.input-group label {
+
+    margin-bottom: 7px;
+
+    font-weight: 600;
+
+    color: #334155;
+
+}
+
+
+.input-group input,
+.input-group select,
+.input-group textarea {
+
+    padding: 12px;
+
+    border: 1px solid #cbd5e1;
+
+    border-radius: 7px;
+
+    font-size: 14px;
+
+    outline: none;
+
+}
+
+
+.input-group input:focus,
+.input-group select:focus,
+.input-group textarea:focus {
+
+    border-color: #2563eb;
+
+}
+
+
+.full-width {
+
+    grid-column: 1 / -1;
+
+}
+
+
+.leave-message {
+
+    font-weight: 600;
+
+    margin-top: 15px;
+
+}
+
+
+.leave-buttons {
+
+    margin-top: 20px;
+
+    display: flex;
+
+    gap: 12px;
+
+}
+
+
+.apply-leave-btn,
+.leave-reset-btn {
+
+    border: none;
+
+    padding: 11px 22px;
+
+    border-radius: 7px;
+
+    cursor: pointer;
+
+    font-weight: 600;
+
+}
+
+
+.apply-leave-btn {
+
+    background: #2563eb;
+
+    color: white;
+
+}
+
+
+.leave-reset-btn {
+
+    background: #64748b;
+
+    color: white;
+
+}
+
+
+
+/* ================================= */
+/* LEAVE TABLE */
+/* ================================= */
+
+.leave-table-container {
+
+    overflow-x: auto;
+
+}
+
+
+.leave-table-container table {
+
+    width: 100%;
+
+    border-collapse: collapse;
+
+}
+
+
+.leave-table-container th,
+.leave-table-container td {
+
+    padding: 13px;
+
+    border-bottom: 1px solid #e2e8f0;
+
+    text-align: left;
+
+}
+
+
+.leave-table-container th {
+
+    background: #f1f5f9;
+
+    color: #334155;
+
+}
+
+
+.leave-table-container td {
+
+    color: #475569;
+
+}
+
+
+
+/* ================================= */
+/* STATUS BADGES */
+/* ================================= */
+
+.status-badge {
+
+    display: inline-block;
+
+    padding: 5px 10px;
+
+    border-radius: 20px;
+
+    font-size: 12px;
+
+    font-weight: 600;
+
+}
+
+
+.status-pending {
+
+    background: #fef3c7;
+
+    color: #92400e;
+
+}
+
+
+.status-approved {
+
+    background: #dcfce7;
+
+    color: #166534;
+
+}
+
+
+.status-rejected {
+
+    background: #fee2e2;
+
+    color: #991b1b;
+
+}
+
+
+.status-cancelled {
+
+    background: #e2e8f0;
+
+    color: #475569;
+
+}
+
+
+
+/* ================================= */
+/* RESPONSIVE */
+/* ================================= */
+
+@media (max-width: 900px) {
+
+    .profile-grid {
+
+        grid-template-columns:
+            repeat(2, 1fr);
+
+    }
+
+
+    .report-grid {
+
+        grid-template-columns:
+            repeat(2, 1fr);
+
+    }
+
+}
+
+
+@media (max-width: 700px) {
+
+    .profile-header {
+
+        padding: 20px;
+
+        flex-direction: column;
+
+        align-items: flex-start;
+
+        gap: 15px;
+
+    }
+
+
+    .header-actions {
+
+        flex-wrap: wrap;
+
+    }
+
+
+    .profile-grid {
+
+        grid-template-columns: 1fr;
+
+    }
+
+
+    .report-grid {
+
+        grid-template-columns: 1fr;
+
+    }
+
+
+    .leave-form-grid {
+
+        grid-template-columns: 1fr;
+
+    }
+
+
+    .full-width {
+
+        grid-column: auto;
+
+    }
+
+}
+
+
+
+/* ================================= */
+/* PRINT */
+/* ================================= */
+
+@media print {
+
+    .profile-header {
+
+        box-shadow: none;
+
+    }
+
+
+    .header-actions,
+    .leave-section {
+
+        display: none;
+
+    }
+
+
+    .profile-container {
+
+        margin: 0;
+
+        max-width: none;
+
+    }
+
+
+    .profile-section,
+    .reports-section,
+    .my-leaves-section {
+
+        box-shadow: none;
+
+        border: 1px solid #ddd;
+
+        break-inside: avoid;
+
+    }
+
+}

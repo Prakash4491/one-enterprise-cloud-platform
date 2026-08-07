@@ -1,14 +1,30 @@
+// ===========================
+// ADMIN ACCESS CHECK
+// ===========================
+
+if (localStorage.getItem("loggedInRole") !== "admin") {
+  alert("Admin access required.");
+  window.location.href = "login.html";
+}
+
 
 let employees = JSON.parse(localStorage.getItem("employees")) || [];
 
 employees.forEach((employee) => {
-  if (!employee.attendance) {
-    employee.attendance = "";
-  }
 
-  if (employee.attendanceSaved === undefined) {
-    employee.attendanceSaved = false;
-  }
+    if (!employee.attendance) {
+        employee.attendance = "";
+    }
+
+    if (employee.attendanceSaved === undefined) {
+        employee.attendanceSaved = false;
+    }
+
+    // Create attendance history if not present
+    if (!employee.attendanceHistory) {
+        employee.attendanceHistory = [];
+    }
+
 });
 
 const attendanceTableBody = document.getElementById("attendanceTableBody");
@@ -117,31 +133,90 @@ function displayAttendance(employeeList) {
 }
 
 function saveOrUpdateAttendance(id) {
-  const employee = employees.find((emp) => emp.id === id);
 
-  employee.attendance = document.getElementById(`status-${id}`).value;
+    const employee =
+        employees.find(emp => emp.id === id);
 
-  employee.attendanceSaved = true;
+    const selectedStatus =
+        document.getElementById(`status-${id}`).value;
 
-  localStorage.setItem("employees", JSON.stringify(employees));
+    employee.attendance = selectedStatus;
+    employee.attendanceSaved = true;
 
-  displayAttendance(employees);
+    // Today's date
+    const today =
+        new Date().toISOString().split("T")[0];
+
+    // Ensure attendanceHistory exists
+    if (!employee.attendanceHistory) {
+        employee.attendanceHistory = [];
+    }
+
+    // Check if attendance already exists for today
+    const existingRecord =
+        employee.attendanceHistory.find(
+            record => record.date === today
+        );
+
+    if (existingRecord) {
+
+        existingRecord.status = selectedStatus;
+
+    } else {
+
+        employee.attendanceHistory.push({
+
+            date: today,
+
+            status: selectedStatus
+
+        });
+
+    }
+
+    localStorage.setItem(
+        "employees",
+        JSON.stringify(employees)
+    );
+
+    displayAttendance(employees);
+
+    alert("Attendance Saved Successfully.");
+
 }
 
 function resetAttendance(id) {
-  if (!confirm("Reset attendance?")) {
-    return;
-  }
 
-  const employee = employees.find((emp) => emp.id === id);
+    if (!confirm("Reset attendance?")) {
+        return;
+    }
 
-  employee.attendance = "";
+    const employee =
+        employees.find(emp => emp.id === id);
 
-  employee.attendanceSaved = false;
+    employee.attendance = "";
 
-  localStorage.setItem("employees", JSON.stringify(employees));
+    employee.attendanceSaved = false;
 
-  displayAttendance(employees);
+    const today =
+        new Date().toISOString().split("T")[0];
+
+    if (employee.attendanceHistory) {
+
+        employee.attendanceHistory =
+            employee.attendanceHistory.filter(
+                record => record.date !== today
+            );
+
+    }
+
+    localStorage.setItem(
+        "employees",
+        JSON.stringify(employees)
+    );
+
+    displayAttendance(employees);
+
 }
 
 function filterAttendance() {

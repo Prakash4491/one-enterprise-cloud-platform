@@ -1,0 +1,618 @@
+<!doctype html>
+<html lang="en">
+
+<head>
+
+    <meta charset="UTF-8">
+
+    <meta
+        name="viewport"
+        content="width=device-width, initial-scale=1.0"
+    >
+
+    <title>Employee Profile</title>
+
+    <link
+        rel="stylesheet"
+        href="css/style.css"
+    >
+
+    <link
+        rel="stylesheet"
+        href="css/employee-profile.css"
+    >
+
+</head>
+
+
+<body>
+
+
+<!-- ================================= -->
+<!-- HEADER -->
+<!-- ================================= -->
+
+<header class="profile-header">
+
+    <div>
+
+        <h1>
+            Employee Dashboard
+        </h1>
+
+        <p>
+            One Enterprise Cloud Platform
+        </p>
+
+    </div>
+
+
+    <div class="header-actions">
+
+        <button
+            id="printBtn"
+            class="print-btn"
+        >
+            🖨️ Print Profile
+        </button>
+
+
+        <button
+            id="downloadBtn"
+            class="download-btn"
+        >
+            ⬇️ Download Profile
+        </button>
+
+
+        <button
+            id="logoutBtn"
+            class="logout-btn"
+        >
+            Logout
+        </button>
+
+    </div>
+
+</header>
+
+
+
+<!-- ================================= -->
+<!-- MAIN CONTAINER -->
+<!-- ================================= -->
+
+<main class="profile-container">
+
+
+    <!-- ================================= -->
+    <!-- EMPLOYEE PROFILE -->
+    <!-- ================================= -->
+
+    <section class="profile-section">
+
+
+        <div class="section-header">
+
+            <h2>
+                My Profile
+            </h2>
+
+            <p>
+                View your employee information.
+            </p>
+
+        </div>
+
+
+
+        <div class="profile-grid">
+
+
+            <!-- Employee ID -->
+
+            <div class="profile-item">
+
+                <span>
+                    Employee ID
+                </span>
+
+                <strong id="employeeId">
+                    -
+                </strong>
+
+            </div>
+
+
+
+            <!-- Name -->
+
+            <div class="profile-item">
+
+                <span>
+                    Full Name
+                </span>
+
+                <strong id="employeeName">
+                    -
+                </strong>
+
+            </div>
+
+
+
+            <!-- Department -->
+
+            <div class="profile-item">
+
+                <span>
+                    Department
+                </span>
+
+                <strong id="employeeDepartment">
+                    -
+                </strong>
+
+            </div>
+
+
+
+            <!-- Designation -->
+
+            <div class="profile-item">
+
+                <span>
+                    Designation
+                </span>
+
+                <strong id="employeeDesignation">
+                    -
+                </strong>
+
+            </div>
+
+
+
+            <!-- Email -->
+
+            <div class="profile-item">
+
+                <span>
+                    Email Address
+                </span>
+
+                <strong id="employeeEmail">
+                    -
+                </strong>
+
+            </div>
+
+
+
+            <!-- Phone -->
+
+            <div class="profile-item">
+
+                <span>
+                    Phone Number
+                </span>
+
+                <strong id="employeeMobile">
+                    -
+                </strong>
+
+            </div>
+
+
+
+            <!-- Joining Date -->
+
+            <div class="profile-item">
+
+                <span>
+                    Date of Joining
+                </span>
+
+                <strong id="employeeJoiningDate">
+                    -
+                </strong>
+
+            </div>
+
+
+
+            <!-- Attendance Percentage -->
+
+            <div class="profile-item">
+
+                <span>
+                    Attendance Percentage
+                </span>
+
+                <strong id="attendancePercentage">
+                    0%
+                </strong>
+
+            </div>
+
+
+
+            <!-- Leave Balance -->
+
+            <div class="profile-item">
+
+                <span>
+                    Leave Balance
+                </span>
+
+                <strong id="leaveBalance">
+                    0 Days
+                </strong>
+
+            </div>
+
+
+        </div>
+
+    </section>
+
+
+
+    <!-- ================================= -->
+    <!-- REPORT SECTION -->
+    <!-- ================================= -->
+
+    <section class="reports-section">
+
+
+        <div class="section-header">
+
+            <h2>
+                My Reports
+            </h2>
+
+            <p>
+                Attendance and leave summary.
+            </p>
+
+        </div>
+
+
+
+        <div class="report-grid">
+
+
+            <!-- Total Working Days -->
+
+            <div class="report-card">
+
+                <div class="report-icon">
+                    📅
+                </div>
+
+                <p>
+                    Total Working Days
+                </p>
+
+                <h2 id="totalWorkingDays">
+                    0
+                </h2>
+
+            </div>
+
+
+
+            <!-- Present Days -->
+
+            <div class="report-card">
+
+                <div class="report-icon">
+                    ✅
+                </div>
+
+                <p>
+                    Present Days
+                </p>
+
+                <h2 id="presentDays">
+                    0
+                </h2>
+
+            </div>
+
+
+
+            <!-- Leave Days -->
+
+            <div class="report-card">
+
+                <div class="report-icon">
+                    🏖️
+                </div>
+
+                <p>
+                    Leave Days
+                </p>
+
+                <h2 id="leaveDays">
+                    0
+                </h2>
+
+            </div>
+
+
+
+            <!-- Attendance Percentage -->
+
+            <div class="report-card">
+
+                <div class="report-icon">
+                    📊
+                </div>
+
+                <p>
+                    Attendance Percentage
+                </p>
+
+                <h2 id="reportAttendancePercentage">
+                    0%
+                </h2>
+
+            </div>
+
+        </div>
+
+    </section>
+
+
+
+    <!-- ================================= -->
+    <!-- APPLY LEAVE -->
+    <!-- ================================= -->
+
+    <section class="leave-section">
+
+
+        <div class="section-header">
+
+            <h2>
+                Apply Leave
+            </h2>
+
+            <p>
+                Submit a leave request for HR approval.
+            </p>
+
+        </div>
+
+
+
+        <form id="leaveForm">
+
+
+            <div class="leave-form-grid">
+
+
+                <!-- Leave Type -->
+
+                <div class="input-group">
+
+                    <label for="leaveType">
+                        Leave Type
+                    </label>
+
+
+                    <select
+                        id="leaveType"
+                        required
+                    >
+
+                        <option value="">
+                            Select Leave Type
+                        </option>
+
+                        <option value="Casual Leave">
+                            Casual Leave
+                        </option>
+
+                        <option value="Sick Leave">
+                            Sick Leave
+                        </option>
+
+                        <option value="Earned Leave">
+                            Earned Leave
+                        </option>
+
+                        <option value="Maternity Leave">
+                            Maternity Leave
+                        </option>
+
+                        <option value="Emergency Leave">
+                            Emergency Leave
+                        </option>
+
+                    </select>
+
+                </div>
+
+
+
+                <!-- From Date -->
+
+                <div class="input-group">
+
+                    <label for="fromDate">
+                        From Date
+                    </label>
+
+
+                    <input
+                        type="date"
+                        id="fromDate"
+                        required
+                    >
+
+                </div>
+
+
+
+                <!-- To Date -->
+
+                <div class="input-group">
+
+                    <label for="toDate">
+                        To Date
+                    </label>
+
+
+                    <input
+                        type="date"
+                        id="toDate"
+                        required
+                    >
+
+                </div>
+
+
+
+                <!-- Reason -->
+
+                <div class="input-group full-width">
+
+                    <label for="leaveReason">
+                        Reason
+                    </label>
+
+
+                    <textarea
+                        id="leaveReason"
+                        rows="4"
+                        placeholder="Enter reason for leave"
+                        required
+                    ></textarea>
+
+                </div>
+
+            </div>
+
+
+
+            <p
+                id="leaveMessage"
+                class="leave-message"
+            ></p>
+
+
+
+            <div class="leave-buttons">
+
+
+                <button
+                    type="submit"
+                    class="apply-leave-btn"
+                >
+                    Apply Leave
+                </button>
+
+
+                <button
+                    type="reset"
+                    class="leave-reset-btn"
+                >
+                    Reset
+                </button>
+
+            </div>
+
+
+        </form>
+
+    </section>
+
+
+
+    <!-- ================================= -->
+    <!-- LEAVE HISTORY -->
+    <!-- ================================= -->
+
+    <section class="my-leaves-section">
+
+
+        <div class="section-header">
+
+            <h2>
+                Leave History
+            </h2>
+
+            <p>
+                Track the status of your leave applications.
+            </p>
+
+        </div>
+
+
+
+        <div class="leave-table-container">
+
+
+            <table>
+
+
+                <thead>
+
+                    <tr>
+
+                        <th>
+                            Leave Type
+                        </th>
+
+                        <th>
+                            From
+                        </th>
+
+                        <th>
+                            To
+                        </th>
+
+                        <th>
+                            Total Days
+                        </th>
+
+                        <th>
+                            Reason
+                        </th>
+
+                        <th>
+                            Status
+                        </th>
+
+                    </tr>
+
+                </thead>
+
+
+
+                <tbody
+                    id="myLeaveTableBody"
+                >
+
+                </tbody>
+
+
+            </table>
+
+        </div>
+
+
+    </section>
+
+
+</main>
+
+
+
+<script src="js/employee-profile.js"></script>
+
+</body>
+
+</html>

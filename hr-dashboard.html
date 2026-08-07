@@ -1,0 +1,354 @@
+<!doctype html>
+<html lang="en">
+
+<head>
+
+    <meta charset="UTF-8">
+
+    <meta
+        name="viewport"
+        content="width=device-width, initial-scale=1.0"
+    >
+
+    <title>HR Dashboard</title>
+
+    <link
+        rel="stylesheet"
+        href="css/style.css"
+    >
+
+    <link
+        rel="stylesheet"
+        href="css/hr-dashboard.css"
+    >
+
+</head>
+
+
+<body>
+
+
+    <!-- ================================= -->
+    <!-- HEADER -->
+    <!-- ================================= -->
+
+    <header class="hr-header">
+
+        <div class="header-content">
+
+            <div>
+
+                <h1>
+                    HR Dashboard
+                </h1>
+
+                <p>
+                    One Enterprise Cloud Platform
+                </p>
+
+            </div>
+
+
+            <div class="header-actions">
+
+                <a
+                    href="dashboard.html"
+                    class="dashboard-btn"
+                >
+                    🏠 Dashboard
+                </a>
+
+
+                <button
+                    id="logoutBtn"
+                    class="logout-btn"
+                >
+                    Logout
+                </button>
+
+            </div>
+
+        </div>
+
+    </header>
+
+
+
+    <!-- ================================= -->
+    <!-- MAIN CONTENT -->
+    <!-- ================================= -->
+
+    <main class="hr-container">
+
+
+        <!-- ================================= -->
+        <!-- WELCOME -->
+        <!-- ================================= -->
+
+        <section class="welcome-section">
+
+            <h2>
+                Welcome to HR Dashboard
+            </h2>
+
+            <p>
+                Monitor employees, attendance and leave information.
+            </p>
+
+        </section>
+
+
+
+        <!-- ================================= -->
+        <!-- SUMMARY CARDS -->
+        <!-- ================================= -->
+
+        <section class="summary-section">
+
+
+            <div class="summary-card">
+
+                <div class="summary-icon">
+                    👥
+                </div>
+
+                <div>
+
+                    <p>
+                        Total Employees
+                    </p>
+
+                    <h2 id="totalEmployees">
+                        0
+                    </h2>
+
+                </div>
+
+            </div>
+
+
+
+            <div class="summary-card">
+
+                <div class="summary-icon">
+                    ✅
+                </div>
+
+                <div>
+
+                    <p>
+                        Present Today
+                    </p>
+
+                    <h2 id="presentToday">
+                        0
+                    </h2>
+
+                </div>
+
+            </div>
+
+
+
+            <div class="summary-card">
+
+                <div class="summary-icon">
+                    🏖️
+                </div>
+
+                <div>
+
+                    <p>
+                        Employees on Leave
+                    </p>
+
+                    <h2 id="employeesOnLeave">
+                        0
+                    </h2>
+
+                </div>
+
+            </div>
+
+
+
+            <div class="summary-card">
+
+                <div class="summary-icon">
+                    ⏳
+                </div>
+
+                <div>
+
+                    <p>
+                        Pending Leave Requests
+                    </p>
+
+                    <h2 id="pendingLeaves">
+                        0
+                    </h2>
+
+                </div>
+
+            </div>
+
+
+
+            <div class="summary-card">
+
+                <div class="summary-icon">
+                    🏢
+                </div>
+
+                <div>
+
+                    <p>
+                        Departments
+                    </p>
+
+                    <h2 id="departmentCount">
+                        0
+                    </h2>
+
+                </div>
+
+            </div>
+
+
+
+            <div class="summary-card">
+
+                <div class="summary-icon">
+                    🟢
+                </div>
+
+                <div>
+
+                    <p>
+                        Active Employees
+                    </p>
+
+                    <h2 id="activeEmployees">
+                        0
+                    </h2>
+
+                </div>
+
+            </div>
+
+        </section>
+
+
+
+        <!-- ================================= -->
+        <!-- HR MODULE NAVIGATION -->
+        <!-- ================================= -->
+
+        <section class="modules-section">
+
+    <h2>
+        HR Management
+    </h2>
+
+    <div class="module-grid">
+
+        <a
+            href="leave-approval.html"
+            class="module-card"
+        >
+
+            <div class="module-icon">
+                📋
+            </div>
+
+            <h3>
+                Leave Approval
+            </h3>
+
+            <p>
+                Review and manage employee leave requests.
+            </p>
+
+        </a>
+
+    </div>
+
+</section>
+
+
+        <!-- ================================= -->
+        <!-- RECENT ACTIVITIES -->
+        <!-- ================================= -->
+
+        <section class="activities-section">
+
+
+            <div class="section-header">
+
+                <div>
+
+                    <h2>
+                        Recent Activities
+                    </h2>
+
+                    <p>
+                        Latest employee, leave and attendance activities.
+                    </p>
+
+                </div>
+
+            </div>
+
+
+
+            <div class="table-container">
+
+                <table>
+
+                    <thead>
+
+                        <tr>
+
+                            <th>
+                                Activity Type
+                            </th>
+
+                            <th>
+                                Employee
+                            </th>
+
+                            <th>
+                                Details
+                            </th>
+
+                            <th>
+                                Date
+                            </th>
+
+                        </tr>
+
+                    </thead>
+
+
+                    <tbody
+                        id="activitiesTableBody"
+                    >
+
+                    </tbody>
+
+                </table>
+
+            </div>
+
+        </section>
+
+
+    </main>
+
+
+
+    <script src="js/hr-dashboard.js"></script>
+
+</body>
+
+</html>

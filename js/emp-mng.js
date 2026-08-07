@@ -1,125 +1,284 @@
+// ===========================
+// ADMIN ACCESS CHECK
+// ===========================
 
-let employees = JSON.parse(localStorage.getItem("employees")) || [];
+if (
+    localStorage.getItem("loggedInRole")
+    !== "admin"
+) {
 
-let editIndex = -1;
+    alert("Admin access required.");
 
-const employeeForm = document.getElementById("employeeForm");
-const employeeTableBody = document.getElementById("employeeTableBody");
-const totalEmployees = document.getElementById("totalEmployees");
-const submitBtn = document.getElementById("submitBtn");
+    window.location.href =
+        "login.html";
 
-employeeForm.addEventListener("submit", function (event) {
-  event.preventDefault();
+}
 
-  const employee = {
-    id: document.getElementById("employeeId").value.trim(),
 
-    name: document.getElementById("employeeName").value.trim(),
+// ===========================
+// LOAD EMPLOYEES
+// ===========================
 
-    department: document.getElementById("department").value,
+let employees =
+    JSON.parse(
+        localStorage.getItem("employees")
+    ) || [];
 
-    designation: document.getElementById("designation").value.trim(),
 
-    email: document.getElementById("email").value.trim(),
+// ===========================
+// HTML ELEMENTS
+// ===========================
 
-    status: "Active",
+const employeeTableBody =
+    document.getElementById(
+        "employeeTableBody"
+    );
 
-    image: "assets/images/employee.png",
-  };
+const totalEmployees =
+    document.getElementById(
+        "totalEmployees"
+    );
 
-  if (editIndex === -1) {
-    employees.push(employee);
-  } else {
-    employees[editIndex] = employee;
 
-    editIndex = -1;
-
-    submitBtn.innerText = "Add Employee";
-  }
-
-  localStorage.setItem("employees", JSON.stringify(employees));
-
-  displayEmployees();
-
-  employeeForm.reset();
-});
+// ===========================
+// DISPLAY EMPLOYEES
+// ===========================
 
 function displayEmployees() {
-  employeeTableBody.innerHTML = "";
 
-  employees.forEach(function (employee, index) {
-    employeeTableBody.innerHTML += `
+    employeeTableBody.innerHTML = "";
 
-        <tr>
 
-            <td>${employee.id}</td>
+    if (employees.length === 0) {
 
-            <td>${employee.name}</td>
+        employeeTableBody.innerHTML = `
 
-            <td>${employee.department}</td>
+            <tr>
 
-            <td>${employee.designation}</td>
+                <td
+                    colspan="6"
+                    style="text-align:center;"
+                >
 
-            <td>${employee.email}</td>
+                    No Employees Registered
 
-            <td>
+                </td>
 
-                <button
-                    class="edit-btn"
-                    onclick="editEmployee(${index})">
-
-                    Edit
-
-                </button>
-
-                <button
-                    class="delete-btn"
-                    onclick="deleteEmployee(${index})">
-
-                    Delete
-
-                </button>
-
-            </td>
-
-        </tr>
+            </tr>
 
         `;
-  });
 
-  totalEmployees.innerText = "Total Employees : " + employees.length;
+        totalEmployees.innerText =
+            "Total Employees : 0";
+
+        return;
+
+    }
+
+
+    employees.forEach(
+        function (employee, index) {
+
+            employeeTableBody.innerHTML += `
+
+                <tr>
+
+                    <td>
+                        ${employee.id}
+                    </td>
+
+                    <td>
+                        ${employee.name}
+                    </td>
+
+                    <td>
+                        ${employee.department}
+                    </td>
+
+                    <td>
+                        ${employee.designation}
+                    </td>
+
+                    <td>
+                        ${employee.email}
+                    </td>
+
+                    <td>
+
+                        <button
+                            class="edit-btn"
+                            onclick="editEmployee(${index})"
+                        >
+                            Edit
+                        </button>
+
+
+                        <button
+                            class="delete-btn"
+                            onclick="deleteEmployee(${index})"
+                        >
+                            Delete
+                        </button>
+
+                    </td>
+
+                </tr>
+
+            `;
+
+        }
+    );
+
+
+    totalEmployees.innerText =
+        "Total Employees : " +
+        employees.length;
+
 }
+
+
+// ===========================
+// EDIT EMPLOYEE
+// ===========================
 
 function editEmployee(index) {
-  const employee = employees[index];
 
-  document.getElementById("employeeId").value = employee.id;
+    const employee =
+        employees[index];
 
-  document.getElementById("employeeName").value = employee.name;
 
-  document.getElementById("department").value = employee.department;
+    const newName =
+        prompt(
+            "Employee Name:",
+            employee.name
+        );
 
-  document.getElementById("designation").value = employee.designation;
 
-  document.getElementById("email").value = employee.email;
+    if (newName === null) {
+        return;
+    }
 
-  editIndex = index;
 
-  submitBtn.innerText = "Update Employee";
-}
+    const newDepartment =
+        prompt(
+            "Department:",
+            employee.department
+        );
 
-function deleteEmployee(index) {
-  const confirmDelete = confirm(
-    "Are you sure you want to delete this employee?",
-  );
 
-  if (confirmDelete) {
-    employees.splice(index, 1);
+    if (newDepartment === null) {
+        return;
+    }
 
-    localStorage.setItem("employees", JSON.stringify(employees));
+
+    const newDesignation =
+        prompt(
+            "Designation:",
+            employee.designation
+        );
+
+
+    if (newDesignation === null) {
+        return;
+    }
+
+
+    const newEmail =
+        prompt(
+            "Email:",
+            employee.email
+        );
+
+
+    if (newEmail === null) {
+        return;
+    }
+
+
+    // ===========================
+    // UPDATE
+    // ===========================
+
+    employee.name =
+        newName.trim();
+
+    employee.department =
+        newDepartment.trim();
+
+    employee.designation =
+        newDesignation.trim();
+
+    employee.email =
+        newEmail.trim();
+
+
+    // ===========================
+    // SAVE
+    // ===========================
+
+    localStorage.setItem(
+        "employees",
+        JSON.stringify(employees)
+    );
+
 
     displayEmployees();
-  }
+
+
+    alert(
+        "Employee Updated Successfully."
+    );
+
 }
+
+
+// ===========================
+// DELETE EMPLOYEE
+// ===========================
+
+function deleteEmployee(index) {
+
+    const employee =
+        employees[index];
+
+
+    const confirmDelete =
+        confirm(
+            "Are you sure you want to delete " +
+            employee.name +
+            "?"
+        );
+
+
+    if (!confirmDelete) {
+        return;
+    }
+
+
+    employees.splice(
+        index,
+        1
+    );
+
+
+    localStorage.setItem(
+        "employees",
+        JSON.stringify(employees)
+    );
+
+
+    displayEmployees();
+
+
+    alert(
+        "Employee Deleted Successfully."
+    );
+
+}
+
+
+// ===========================
+// INITIAL LOAD
+// ===========================
 
 displayEmployees();

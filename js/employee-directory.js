@@ -1,18 +1,82 @@
-let employees = JSON.parse(localStorage.getItem("employees")) || [];
+// ===========================
+// ADMIN ACCESS CHECK
+// ===========================
 
-const employeeContainer = document.getElementById("employeeContainer");
-const searchInput = document.getElementById("searchInput");
-const departmentFilter = document.getElementById("departmentFilter");
-const statusFilter = document.getElementById("statusFilter");
-const designationFilter = document.getElementById("designationFilter");
-const sortOption = document.getElementById("sortOption");
-const resetBtn = document.getElementById("resetBtn");
+if (localStorage.getItem("loggedInRole") !== "admin") {
+
+    alert("Admin access required.");
+
+    window.location.href = "login.html";
+
+}
+
+
+// ===========================
+// LOAD EMPLOYEES
+// ===========================
+
+let employees =
+    JSON.parse(
+        localStorage.getItem("employees")
+    ) || [];
+
+
+// ===========================
+// HTML ELEMENTS
+// ===========================
+
+const employeeContainer =
+    document.getElementById(
+        "employeeContainer"
+    );
+
+const searchInput =
+    document.getElementById(
+        "searchInput"
+    );
+
+const departmentFilter =
+    document.getElementById(
+        "departmentFilter"
+    );
+
+const statusFilter =
+    document.getElementById(
+        "statusFilter"
+    );
+
+const designationFilter =
+    document.getElementById(
+        "designationFilter"
+    );
+
+const sortOption =
+    document.getElementById(
+        "sortOption"
+    );
+
+const resetBtn =
+    document.getElementById(
+        "resetBtn"
+    );
+
+
+// ===========================
+// DISPLAY EMPLOYEES
+// ===========================
 
 function displayEmployees(employeeList) {
-  employeeContainer.innerHTML = "";
 
-  if (employeeList.length === 0) {
-    employeeContainer.innerHTML = `
+    employeeContainer.innerHTML = "";
+
+
+    // ===========================
+    // NO EMPLOYEES
+    // ===========================
+
+    if (employeeList.length === 0) {
+
+        employeeContainer.innerHTML = `
 
             <h2 class="no-data">
 
@@ -22,111 +86,390 @@ function displayEmployees(employeeList) {
 
         `;
 
-    return;
-  }
+        return;
 
-  employeeList.forEach((employee) => {
-    employeeContainer.innerHTML += `
+    }
 
-        <div class="employee-card">
 
-            <img
-                src="${employee.image}"
-                alt="${employee.name}">
+    // ===========================
+    // DISPLAY CARDS
+    // ===========================
 
-            <h3>${employee.name}</h3>
+    employeeList.forEach(
+        function (employee) {
 
-            <p><strong>ID :</strong> ${employee.id}</p>
-            <p><strong>Department :</strong> ${employee.department}</p>
-            <p><strong>Designation :</strong> ${employee.designation}</p>
-            <p><strong>Email :</strong> ${employee.email}</p>
-            <span class="status ${employee.status.toLowerCase()}">
+            const image =
+                employee.image ||
+                "assets/images/employee.png";
 
-                ${employee.status}
 
-            </span>
+            const status =
+                employee.status ||
+                "Active";
 
-        </div>
 
-        `;
-  });
+            employeeContainer.innerHTML += `
+
+                <div class="employee-card">
+
+                    <img
+                        src="${image}"
+                        alt="${employee.name}"
+                    >
+
+
+                    <h3>
+                        ${employee.name}
+                    </h3>
+
+
+                    <p>
+                        <strong>ID :</strong>
+                        ${employee.id}
+                    </p>
+
+
+                    <p>
+                        <strong>Department :</strong>
+                        ${employee.department}
+                    </p>
+
+
+                    <p>
+                        <strong>Designation :</strong>
+                        ${employee.designation}
+                    </p>
+
+
+                    <p>
+                        <strong>Email :</strong>
+                        ${employee.email}
+                    </p>
+
+
+                    <span
+                        class="status ${status.toLowerCase()}"
+                    >
+
+                        ${status}
+
+                    </span>
+
+                </div>
+
+            `;
+
+        }
+    );
+
 }
+
+
+// ===========================
+// FILTER EMPLOYEES
+// ===========================
 
 function filterEmployees() {
-  let filteredEmployees = [...employees];
-  const searchValue = searchInput.value.toLowerCase();
-  const departmentValue = departmentFilter.value;
-  const designationValue = designationFilter.value;
-  const statusValue = statusFilter.value;
-  const sortValue = sortOption.value;
 
-  filteredEmployees = filteredEmployees.filter((employee) => {
-    const matchesSearch =
-      employee.name.toLowerCase().includes(searchValue) ||
-      employee.id.toLowerCase().includes(searchValue);
+    let filteredEmployees =
+        [...employees];
 
-    const matchesDepartment =
-      departmentValue === "All" || employee.department === departmentValue;
 
-    const matchesDesignation =
-      designationValue === "All" || employee.designation === designationValue;
+    // ===========================
+    // SEARCH
+    // ===========================
 
-    const matchesStatus =
-      statusValue === "All" || employee.status === statusValue;
+    const searchValue =
+        searchInput.value
+            .trim()
+            .toLowerCase();
 
-    return (
-      matchesSearch && matchesDepartment && matchesDesignation && matchesStatus
+
+    // ===========================
+    // FILTER VALUES
+    // ===========================
+
+    const departmentValue =
+        departmentFilter.value;
+
+
+    const designationValue =
+        designationFilter.value;
+
+
+    const statusValue =
+        statusFilter.value;
+
+
+    const sortValue =
+        sortOption.value;
+
+
+    // ===========================
+    // FILTER
+    // ===========================
+
+    filteredEmployees =
+        filteredEmployees.filter(
+            function (employee) {
+
+
+                const employeeName =
+                    (employee.name || "")
+                        .toLowerCase();
+
+
+                const employeeId =
+                    (employee.id || "")
+                        .toLowerCase();
+
+
+                const matchesSearch =
+
+                    employeeName.includes(
+                        searchValue
+                    )
+
+                    ||
+
+                    employeeId.includes(
+                        searchValue
+                    );
+
+
+                const matchesDepartment =
+
+                    departmentValue === "All"
+
+                    ||
+
+                    employee.department ===
+                    departmentValue;
+
+
+                const matchesDesignation =
+
+                    designationValue === "All"
+
+                    ||
+
+                    employee.designation ===
+                    designationValue;
+
+
+                const matchesStatus =
+
+                    statusValue === "All"
+
+                    ||
+
+                    (employee.status || "Active") ===
+                    statusValue;
+
+
+                return (
+
+                    matchesSearch &&
+
+                    matchesDepartment &&
+
+                    matchesDesignation &&
+
+                    matchesStatus
+
+                );
+
+            }
+        );
+
+
+    // ===========================
+    // SORT
+    // ===========================
+
+    switch (sortValue) {
+
+
+        // ===========================
+        // NAME A-Z
+        // ===========================
+
+        case "nameAsc":
+
+            filteredEmployees.sort(
+                function (a, b) {
+
+                    return (
+                        a.name || ""
+                    ).localeCompare(
+                        b.name || ""
+                    );
+
+                }
+            );
+
+            break;
+
+
+        // ===========================
+        // NAME Z-A
+        // ===========================
+
+        case "nameDesc":
+
+            filteredEmployees.sort(
+                function (a, b) {
+
+                    return (
+                        b.name || ""
+                    ).localeCompare(
+                        a.name || ""
+                    );
+
+                }
+            );
+
+            break;
+
+
+        // ===========================
+        // ID ASCENDING
+        // ===========================
+
+        case "idAsc":
+
+            filteredEmployees.sort(
+                function (a, b) {
+
+                    return (
+                        a.id || ""
+                    ).localeCompare(
+                        b.id || ""
+                    );
+
+                }
+            );
+
+            break;
+
+
+        // ===========================
+        // ID DESCENDING
+        // ===========================
+
+        case "idDesc":
+
+            filteredEmployees.sort(
+                function (a, b) {
+
+                    return (
+                        b.id || ""
+                    ).localeCompare(
+                        a.id || ""
+                    );
+
+                }
+            );
+
+            break;
+
+    }
+
+
+    // ===========================
+    // DISPLAY RESULT
+    // ===========================
+
+    displayEmployees(
+        filteredEmployees
     );
-  });
 
-  switch (sortValue) {
-    case "nameAsc":
-      filteredEmployees.sort((a, b) => a.name.localeCompare(b.name));
-
-      break;
-
-    case "nameDesc":
-      filteredEmployees.sort((a, b) => b.name.localeCompare(a.name));
-
-      break;
-
-    case "idAsc":
-      filteredEmployees.sort((a, b) => a.id.localeCompare(b.id));
-
-      break;
-
-    case "idDesc":
-      filteredEmployees.sort((a, b) => b.id.localeCompare(a.id));
-
-      break;
-  }
-
-  displayEmployees(filteredEmployees);
 }
 
 
-searchInput.addEventListener("keyup", filterEmployees);
-departmentFilter.addEventListener("change", filterEmployees);
-statusFilter.addEventListener("change", filterEmployees);
-designationFilter.addEventListener(
-  "change",
+// ===========================
+// SEARCH EVENT
+// ===========================
 
-  filterEmployees,
+searchInput.addEventListener(
+    "keyup",
+    filterEmployees
 );
+
+
+// ===========================
+// DEPARTMENT EVENT
+// ===========================
+
+departmentFilter.addEventListener(
+    "change",
+    filterEmployees
+);
+
+
+// ===========================
+// STATUS EVENT
+// ===========================
+
+statusFilter.addEventListener(
+    "change",
+    filterEmployees
+);
+
+
+// ===========================
+// DESIGNATION EVENT
+// ===========================
+
+designationFilter.addEventListener(
+    "change",
+    filterEmployees
+);
+
+
+// ===========================
+// SORT EVENT
+// ===========================
 
 sortOption.addEventListener(
-  "change",
-
-  filterEmployees,
+    "change",
+    filterEmployees
 );
 
-resetBtn.addEventListener("click", function () {
-  searchInput.value = "";
-  departmentFilter.value = "All";
-  designationFilter.value = "All";
-  statusFilter.value = "All";
-  sortOption.value = "";
-  displayEmployees(employees);
-});
 
-displayEmployees(employees);
+// ===========================
+// RESET FILTERS
+// ===========================
+
+resetBtn.addEventListener(
+    "click",
+    function () {
+
+        searchInput.value = "";
+
+        departmentFilter.value =
+            "All";
+
+        designationFilter.value =
+            "All";
+
+        statusFilter.value =
+            "All";
+
+        sortOption.value = "";
+
+        displayEmployees(
+            employees
+        );
+
+    }
+);
+
+
+// ===========================
+// INITIAL DISPLAY
+// ===========================
+
+displayEmployees(
+    employees
+);
