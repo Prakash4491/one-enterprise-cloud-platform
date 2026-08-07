@@ -1,291 +1,251 @@
-@import url("https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap");
-
-
-/* ===========================
-   GLOBAL
-=========================== */
-
-* {
-    margin: 0;
-    padding: 0;
-    box-sizing: border-box;
-
-    font-family: "Poppins", sans-serif;
-}
-
-
 body {
-    background: #f5f7fb;
+  background: #f5f7fb;
 
-    min-height: 100vh;
+  min-height: 100vh;
 
-    padding: 40px;
+  padding: 40px;
 }
-
 
 /* ===========================
    MAIN CONTAINER
 =========================== */
 
 .container {
-    width: 100%;
+  width: 100%;
 
-    max-width: 1250px;
+  max-width: 1250px;
 
-    margin: auto;
+  margin: auto;
 }
-
 
 /* ===========================
    TITLE BOX
 =========================== */
 
 .title-box {
-    background: #ffffff;
+  background: #ffffff;
 
-    padding: 30px 35px;
+  padding: 30px 35px;
 
-    border-radius: 15px;
+  border-radius: 15px;
 
-    box-shadow:
-        0 10px 30px
-        rgba(0, 0, 0, 0.08);
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.08);
 
-    margin-bottom: 25px;
+  margin-bottom: 25px;
 }
-
 
 .title-box h1 {
-    color: #0056d2;
+  color: #0056d2;
 
-    text-align: center;
+  text-align: center;
 
-    font-size: 32px;
+  font-size: 32px;
 
-    font-weight: 700;
+  font-weight: 700;
 
-    margin-bottom: 8px;
+  margin-bottom: 8px;
 }
-
 
 .title-box > p {
-    text-align: center;
+  text-align: center;
 
-    color: #555;
+  color: #555;
 
-    font-size: 16px;
+  font-size: 16px;
 
-    margin-bottom: 25px;
+  margin-bottom: 25px;
 }
-
 
 /* ===========================
    MANAGEMENT BUTTONS
 =========================== */
 
 .management-buttons {
-    display: flex;
+  display: flex;
 
-    justify-content: center;
+  justify-content: center;
 
-    align-items: center;
+  align-items: center;
 
-    gap: 15px;
+  gap: 15px;
 
-    flex-wrap: wrap;
+  flex-wrap: wrap;
 }
-
 
 .management-buttons a {
-    padding: 12px 24px;
+  padding: 12px 24px;
 
-    border-radius: 8px;
+  border-radius: 8px;
 
-    text-decoration: none;
+  text-decoration: none;
 
-    font-size: 15px;
+  font-size: 15px;
 
-    font-weight: 600;
+  font-weight: 600;
 
-    transition: 0.3s;
+  transition: 0.3s;
 }
-
 
 /* ===========================
    REGISTER BUTTON
 =========================== */
 
 .button-group {
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    gap: 16px;
-    margin-top: 25px;
-    flex-wrap: wrap;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 16px;
+  margin-top: 25px;
+  flex-wrap: wrap;
 }
 
 .button-group a {
-    text-decoration: none;
-    border-radius: 8px;
-    padding: 15px 28px;
-    font-size: 17px;
-    font-weight: 600;
-    display: inline-block;
-    transition: 0.3s ease;
+  text-decoration: none;
+  border-radius: 8px;
+  padding: 15px 28px;
+  font-size: 17px;
+  font-weight: 600;
+  display: inline-block;
+  transition: 0.3s ease;
 }
 
 /* Register */
 
 .register-btn {
-    background: #0563d8;
-    color: white;
+  background: #0563d8;
+  color: white;
 }
 
 .register-btn:hover {
-    background: #034da8;
-    transform: translateY(-2px);
+  background: #034da8;
+  transform: translateY(-2px);
 }
 
 /* Directory */
 
 .directory-btn {
-    background: #ea8a0d;
-    color: white;
+  background: #ea8a0d;
+  color: white;
 }
 
 .directory-btn:hover {
-    background: #f1b949;
-    transform: translateY(-2px);
+  background: #f1b949;
+  transform: translateY(-2px);
 }
 
 /* Dashboard */
 
 .back-btn {
-    background: #38b83d;
-    color: white;
+  background: #38b83d;
+  color: white;
 }
 
 .back-btn:hover {
-    background: #29962e;
-    transform: translateY(-2px);
+  background: #29962e;
+  transform: translateY(-2px);
 }
-
 
 /* ===========================
    TABLE BOX
 =========================== */
 
 .table-box {
-    background: #ffffff;
+  background: #ffffff;
 
-    padding: 30px;
+  padding: 30px;
 
-    border-radius: 15px;
+  border-radius: 15px;
 
-    box-shadow:
-        0 10px 30px
-        rgba(0, 0, 0, 0.08);
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.08);
 }
-
 
 /* ===========================
    TABLE HEADER
 =========================== */
 
 .table-header {
-    display: flex;
+  display: flex;
 
-    justify-content: space-between;
+  justify-content: space-between;
 
-    align-items: center;
+  align-items: center;
 
-    margin-bottom: 25px;
+  margin-bottom: 25px;
 }
-
 
 .table-header h2 {
-    color: #0056d2;
+  color: #0056d2;
 
-    font-size: 24px;
+  font-size: 24px;
 
-    margin-bottom: 5px;
+  margin-bottom: 5px;
 }
-
 
 .table-header h3 {
-    color: #555;
+  color: #555;
 
-    font-size: 15px;
+  font-size: 15px;
 
-    font-weight: 500;
+  font-weight: 500;
 }
-
 
 /* ===========================
    TABLE CONTAINER
 =========================== */
 
 .table-container {
-    width: 100%;
+  width: 100%;
 
-    overflow-x: auto;
+  overflow-x: auto;
 }
-
 
 /* ===========================
    TABLE
 =========================== */
 
 table {
-    width: 100%;
+  width: 100%;
 
-    min-width: 850px;
+  min-width: 850px;
 
-    border-collapse: collapse;
+  border-collapse: collapse;
 }
-
 
 thead {
-    background: #0056d2;
+  background: #0056d2;
 
-    color: #ffffff;
+  color: #ffffff;
 }
-
 
 th {
-    padding: 15px 12px;
+  padding: 15px 12px;
 
-    text-align: left;
+  text-align: left;
 
-    font-size: 14px;
+  font-size: 14px;
 
-    font-weight: 600;
+  font-weight: 600;
 
-    white-space: nowrap;
+  white-space: nowrap;
 }
-
 
 td {
-    padding: 14px 12px;
+  padding: 14px 12px;
 
-    border-bottom:
-        1px solid #e5e7eb;
+  border-bottom: 1px solid #e5e7eb;
 
-    font-size: 14px;
+  font-size: 14px;
 
-    color: #333;
+  color: #333;
 }
-
 
 tbody tr {
-    transition: 0.2s;
+  transition: 0.2s;
 }
-
 
 tbody tr:hover {
-    background: #f8faff;
+  background: #f8faff;
 }
-
 
 /* ===========================
    ACTION BUTTONS
@@ -293,126 +253,110 @@ tbody tr:hover {
 
 .edit-btn,
 .delete-btn {
-    border: none;
+  border: none;
 
-    border-radius: 6px;
+  border-radius: 6px;
 
-    padding: 8px 15px;
+  padding: 8px 15px;
 
-    font-size: 13px;
+  font-size: 13px;
 
-    font-weight: 600;
+  font-weight: 600;
 
-    cursor: pointer;
+  cursor: pointer;
 
-    transition: 0.3s;
+  transition: 0.3s;
 
-    margin-right: 5px;
+  margin-right: 5px;
 }
-
 
 /* ===========================
    EDIT
 =========================== */
 
 .edit-btn {
-    background: #f59e0b;
+  background: #f59e0b;
 
-    color: #ffffff;
+  color: #ffffff;
 }
-
 
 .edit-btn:hover {
-    background: #d97706;
+  background: #d97706;
 
-    transform: translateY(-1px);
+  transform: translateY(-1px);
 }
-
 
 /* ===========================
    DELETE
 =========================== */
 
 .delete-btn {
-    background: #dc2626;
+  background: #dc2626;
 
-    color: #ffffff;
+  color: #ffffff;
 }
-
 
 .delete-btn:hover {
-    background: #b91c1c;
+  background: #b91c1c;
 
-    transform: translateY(-1px);
+  transform: translateY(-1px);
 }
-
 
 /* ===========================
    NO DATA
 =========================== */
 
 .table-container td[colspan] {
-    padding: 40px;
+  padding: 40px;
 
-    text-align: center;
+  text-align: center;
 
-    color: #777;
+  color: #777;
 
-    font-size: 16px;
+  font-size: 16px;
 }
-
 
 /* ===========================
    MOBILE
 =========================== */
 
 @media (max-width: 768px) {
+  body {
+    padding: 15px;
+  }
 
-    body {
-        padding: 15px;
-    }
+  .title-box {
+    padding: 25px 20px;
+  }
 
+  .title-box h1 {
+    font-size: 26px;
+  }
 
-    .title-box {
-        padding: 25px 20px;
-    }
+  .title-box > p {
+    font-size: 14px;
+  }
 
+  .management-buttons {
+    flex-direction: column;
+  }
 
-    .title-box h1 {
-        font-size: 26px;
-    }
+  .management-buttons a {
+    width: 100%;
 
+    text-align: center;
+  }
 
-    .title-box > p {
-        font-size: 14px;
-    }
+  .table-box {
+    padding: 20px 15px;
+  }
 
+  .table-header h2 {
+    font-size: 21px;
+  }
 
-    .management-buttons {
-        flex-direction: column;
-    }
-
-
-    .management-buttons a {
-        width: 100%;
-
-        text-align: center;
-    }
-
-
-    .table-box {
-        padding: 20px 15px;
-    }
-
-
-    .table-header h2 {
-        font-size: 21px;
-    }
-
-
-    .edit-btn,
-    .delete-btn {
-        margin-bottom: 5px;
-    }
-
+  .edit-btn,
+  .delete-btn {
+    margin-bottom: 5px;
+  }
 }

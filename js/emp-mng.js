@@ -2,56 +2,35 @@
 // ADMIN ACCESS CHECK
 // ===========================
 
-if (
-    localStorage.getItem("loggedInRole")
-    !== "admin"
-) {
+if (localStorage.getItem("loggedInRole") !== "admin") {
+  alert("Admin access required.");
 
-    alert("Admin access required.");
-
-    window.location.href =
-        "login.html";
-
+  window.location.href = "login.html";
 }
-
 
 // ===========================
 // LOAD EMPLOYEES
 // ===========================
 
-let employees =
-    JSON.parse(
-        localStorage.getItem("employees")
-    ) || [];
-
+let employees = JSON.parse(localStorage.getItem("employees")) || [];
 
 // ===========================
 // HTML ELEMENTS
 // ===========================
 
-const employeeTableBody =
-    document.getElementById(
-        "employeeTableBody"
-    );
+const employeeTableBody = document.getElementById("employeeTableBody");
 
-const totalEmployees =
-    document.getElementById(
-        "totalEmployees"
-    );
-
+const totalEmployees = document.getElementById("totalEmployees");
 
 // ===========================
 // DISPLAY EMPLOYEES
 // ===========================
 
 function displayEmployees() {
+  employeeTableBody.innerHTML = "";
 
-    employeeTableBody.innerHTML = "";
-
-
-    if (employees.length === 0) {
-
-        employeeTableBody.innerHTML = `
+  if (employees.length === 0) {
+    employeeTableBody.innerHTML = `
 
             <tr>
 
@@ -68,18 +47,13 @@ function displayEmployees() {
 
         `;
 
-        totalEmployees.innerText =
-            "Total Employees : 0";
+    totalEmployees.innerText = "Total Employees : 0";
 
-        return;
+    return;
+  }
 
-    }
-
-
-    employees.forEach(
-        function (employee, index) {
-
-            employeeTableBody.innerHTML += `
+  employees.forEach(function (employee, index) {
+    employeeTableBody.innerHTML += `
 
                 <tr>
 
@@ -125,157 +99,88 @@ function displayEmployees() {
                 </tr>
 
             `;
+  });
 
-        }
-    );
-
-
-    totalEmployees.innerText =
-        "Total Employees : " +
-        employees.length;
-
+  totalEmployees.innerText = "Total Employees : " + employees.length;
 }
-
 
 // ===========================
 // EDIT EMPLOYEE
 // ===========================
 
 function editEmployee(index) {
+  const employee = employees[index];
 
-    const employee =
-        employees[index];
+  const newName = prompt("Employee Name:", employee.name);
 
+  if (newName === null) {
+    return;
+  }
 
-    const newName =
-        prompt(
-            "Employee Name:",
-            employee.name
-        );
+  const newDepartment = prompt("Department:", employee.department);
 
+  if (newDepartment === null) {
+    return;
+  }
 
-    if (newName === null) {
-        return;
-    }
+  const newDesignation = prompt("Designation:", employee.designation);
 
+  if (newDesignation === null) {
+    return;
+  }
 
-    const newDepartment =
-        prompt(
-            "Department:",
-            employee.department
-        );
+  const newEmail = prompt("Email:", employee.email);
 
+  if (newEmail === null) {
+    return;
+  }
 
-    if (newDepartment === null) {
-        return;
-    }
+  // ===========================
+  // UPDATE
+  // ===========================
 
+  employee.name = newName.trim();
 
-    const newDesignation =
-        prompt(
-            "Designation:",
-            employee.designation
-        );
+  employee.department = newDepartment.trim();
 
+  employee.designation = newDesignation.trim();
 
-    if (newDesignation === null) {
-        return;
-    }
+  employee.email = newEmail.trim();
 
+  // ===========================
+  // SAVE
+  // ===========================
 
-    const newEmail =
-        prompt(
-            "Email:",
-            employee.email
-        );
+  localStorage.setItem("employees", JSON.stringify(employees));
 
+  displayEmployees();
 
-    if (newEmail === null) {
-        return;
-    }
-
-
-    // ===========================
-    // UPDATE
-    // ===========================
-
-    employee.name =
-        newName.trim();
-
-    employee.department =
-        newDepartment.trim();
-
-    employee.designation =
-        newDesignation.trim();
-
-    employee.email =
-        newEmail.trim();
-
-
-    // ===========================
-    // SAVE
-    // ===========================
-
-    localStorage.setItem(
-        "employees",
-        JSON.stringify(employees)
-    );
-
-
-    displayEmployees();
-
-
-    alert(
-        "Employee Updated Successfully."
-    );
-
+  alert("Employee Updated Successfully.");
 }
-
 
 // ===========================
 // DELETE EMPLOYEE
 // ===========================
 
 function deleteEmployee(index) {
+  const employee = employees[index];
 
-    const employee =
-        employees[index];
+  const confirmDelete = confirm(
+    "Are you sure you want to delete " + employee.name + "?",
+  );
 
+  if (!confirmDelete) {
+    return;
+  }
 
-    const confirmDelete =
-        confirm(
-            "Are you sure you want to delete " +
-            employee.name +
-            "?"
-        );
+  employees.splice(index, 1);
 
+  localStorage.setItem("employees", JSON.stringify(employees));
 
-    if (!confirmDelete) {
-        return;
-    }
+  displayEmployees();
 
-
-    employees.splice(
-        index,
-        1
-    );
-
-
-    localStorage.setItem(
-        "employees",
-        JSON.stringify(employees)
-    );
-
-
-    displayEmployees();
-
-
-    alert(
-        "Employee Deleted Successfully."
-    );
-
+  alert("Employee Deleted Successfully.");
 }
-
 
 // ===========================
 // INITIAL LOAD

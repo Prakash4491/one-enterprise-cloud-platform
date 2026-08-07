@@ -1,133 +1,92 @@
-/* ================================= */
-/* PROFILE HEADER */
-/* ================================= */
-
 .profile-header {
+  background: white;
 
-    background: white;
+  padding: 25px 50px;
 
-    padding: 25px 50px;
+  display: flex;
 
-    display: flex;
+  justify-content: space-between;
 
-    justify-content: space-between;
+  align-items: center;
 
-    align-items: center;
+  border-bottom: 1px solid #e5e7eb;
 
-    border-bottom: 1px solid #e5e7eb;
-
-    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.05);
-
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.05);
 }
-
 
 .profile-header h1 {
+  margin: 0;
 
-    margin: 0;
+  color: #1e3a8a;
 
-    color: #1e3a8a;
-
-    font-size: 28px;
-
+  font-size: 28px;
 }
-
 
 .profile-header p {
+  margin: 5px 0 0;
 
-    margin: 5px 0 0;
-
-    color: #64748b;
-
+  color: #64748b;
 }
-
 
 .header-actions {
+  display: flex;
 
-    display: flex;
+  gap: 10px;
 
-    gap: 10px;
-
-    align-items: center;
-
+  align-items: center;
 }
-
-
-
-/* ================================= */
-/* BUTTONS */
-/* ================================= */
 
 .print-btn,
 .download-btn,
 .logout-btn {
+  border: none;
 
-    border: none;
+  padding: 11px 18px;
 
-    padding: 11px 18px;
+  border-radius: 7px;
 
-    border-radius: 7px;
+  cursor: pointer;
 
-    cursor: pointer;
+  font-size: 14px;
 
-    font-size: 14px;
-
-    font-weight: 600;
-
+  font-weight: 600;
 }
-
 
 .print-btn {
+  background: #2563eb;
 
-    background: #2563eb;
-
-    color: white;
-
+  color: white;
 }
-
 
 .download-btn {
+  background: #16a34a;
 
-    background: #16a34a;
-
-    color: white;
-
+  color: white;
 }
-
 
 .logout-btn {
+  background: #dc2626;
 
-    background: #dc2626;
-
-    color: white;
-
+  color: white;
 }
-
 
 .print-btn:hover,
 .download-btn:hover,
 .logout-btn:hover {
-
-    opacity: 0.9;
-
+  opacity: 0.9;
 }
-
-
 
 /* ================================= */
 /* MAIN CONTAINER */
 /* ================================= */
 
 .profile-container {
+  max-width: 1200px;
 
-    max-width: 1200px;
+  margin: 30px auto;
 
-    margin: 30px auto;
-
-    padding: 0 20px;
-
+  padding: 0 20px;
 }
-
-
 
 /* ================================= */
 /* SECTIONS */
@@ -137,513 +96,358 @@
 .reports-section,
 .leave-section,
 .my-leaves-section {
+  background: white;
 
-    background: white;
+  padding: 30px;
 
-    padding: 30px;
+  margin-bottom: 25px;
 
-    margin-bottom: 25px;
+  border-radius: 12px;
 
-    border-radius: 12px;
-
-    box-shadow: 0 3px 12px rgba(0, 0, 0, 0.06);
-
+  box-shadow: 0 3px 12px rgba(0, 0, 0, 0.06);
 }
-
 
 .section-header {
-
-    margin-bottom: 25px;
-
+  margin-bottom: 25px;
 }
-
 
 .section-header h2 {
+  margin: 0;
 
-    margin: 0;
+  color: #1e293b;
 
-    color: #1e293b;
-
-    font-size: 23px;
-
+  font-size: 23px;
 }
-
 
 .section-header p {
+  margin-top: 6px;
 
-    margin-top: 6px;
-
-    color: #64748b;
-
+  color: #64748b;
 }
-
-
 
 /* ================================= */
 /* PROFILE GRID */
 /* ================================= */
 
 .profile-grid {
+  display: grid;
 
-    display: grid;
+  grid-template-columns: repeat(3, 1fr);
 
-    grid-template-columns:
-        repeat(3, 1fr);
-
-    gap: 18px;
-
+  gap: 18px;
 }
-
 
 .profile-item {
+  padding: 18px;
 
-    padding: 18px;
+  background: #f8fafc;
 
-    background: #f8fafc;
+  border: 1px solid #e2e8f0;
 
-    border: 1px solid #e2e8f0;
-
-    border-radius: 8px;
-
+  border-radius: 8px;
 }
-
 
 .profile-item span {
+  display: block;
 
-    display: block;
+  font-size: 13px;
 
-    font-size: 13px;
+  color: #64748b;
 
-    color: #64748b;
-
-    margin-bottom: 7px;
-
+  margin-bottom: 7px;
 }
-
 
 .profile-item strong {
+  display: block;
 
-    display: block;
+  color: #1e293b;
 
-    color: #1e293b;
+  font-size: 16px;
 
-    font-size: 16px;
-
-    word-break: break-word;
-
+  word-break: break-word;
 }
-
-
 
 /* ================================= */
 /* REPORT CARDS */
 /* ================================= */
 
 .report-grid {
+  display: grid;
 
-    display: grid;
+  grid-template-columns: repeat(4, 1fr);
 
-    grid-template-columns:
-        repeat(4, 1fr);
-
-    gap: 20px;
-
+  gap: 20px;
 }
-
 
 .report-card {
+  padding: 25px;
 
-    padding: 25px;
+  border-radius: 10px;
 
-    border-radius: 10px;
+  background: #f8fafc;
 
-    background: #f8fafc;
+  border: 1px solid #e2e8f0;
 
-    border: 1px solid #e2e8f0;
-
-    text-align: center;
-
+  text-align: center;
 }
-
 
 .report-icon {
+  font-size: 30px;
 
-    font-size: 30px;
-
-    margin-bottom: 10px;
-
+  margin-bottom: 10px;
 }
-
 
 .report-card p {
+  margin: 0;
 
-    margin: 0;
+  color: #64748b;
 
-    color: #64748b;
-
-    font-size: 14px;
-
+  font-size: 14px;
 }
-
 
 .report-card h2 {
+  margin: 10px 0 0;
 
-    margin: 10px 0 0;
+  font-size: 28px;
 
-    font-size: 28px;
-
-    color: #1e3a8a;
-
+  color: #1e3a8a;
 }
-
-
 
 /* ================================= */
 /* LEAVE FORM */
 /* ================================= */
 
 .leave-form-grid {
+  display: grid;
 
-    display: grid;
+  grid-template-columns: repeat(2, 1fr);
 
-    grid-template-columns:
-        repeat(2, 1fr);
-
-    gap: 20px;
-
+  gap: 20px;
 }
-
 
 .input-group {
+  display: flex;
 
-    display: flex;
-
-    flex-direction: column;
-
+  flex-direction: column;
 }
-
 
 .input-group label {
+  margin-bottom: 7px;
 
-    margin-bottom: 7px;
+  font-weight: 600;
 
-    font-weight: 600;
-
-    color: #334155;
-
+  color: #334155;
 }
-
 
 .input-group input,
 .input-group select,
 .input-group textarea {
+  padding: 12px;
 
-    padding: 12px;
+  border: 1px solid #cbd5e1;
 
-    border: 1px solid #cbd5e1;
+  border-radius: 7px;
 
-    border-radius: 7px;
+  font-size: 14px;
 
-    font-size: 14px;
-
-    outline: none;
-
+  outline: none;
 }
-
 
 .input-group input:focus,
 .input-group select:focus,
 .input-group textarea:focus {
-
-    border-color: #2563eb;
-
+  border-color: #2563eb;
 }
-
 
 .full-width {
-
-    grid-column: 1 / -1;
-
+  grid-column: 1 / -1;
 }
-
 
 .leave-message {
+  font-weight: 600;
 
-    font-weight: 600;
-
-    margin-top: 15px;
-
+  margin-top: 15px;
 }
-
 
 .leave-buttons {
+  margin-top: 20px;
 
-    margin-top: 20px;
+  display: flex;
 
-    display: flex;
-
-    gap: 12px;
-
+  gap: 12px;
 }
-
 
 .apply-leave-btn,
 .leave-reset-btn {
+  border: none;
 
-    border: none;
+  padding: 11px 22px;
 
-    padding: 11px 22px;
+  border-radius: 7px;
 
-    border-radius: 7px;
+  cursor: pointer;
 
-    cursor: pointer;
-
-    font-weight: 600;
-
+  font-weight: 600;
 }
-
 
 .apply-leave-btn {
+  background: #2563eb;
 
-    background: #2563eb;
-
-    color: white;
-
+  color: white;
 }
-
 
 .leave-reset-btn {
+  background: #64748b;
 
-    background: #64748b;
-
-    color: white;
-
+  color: white;
 }
-
-
 
 /* ================================= */
 /* LEAVE TABLE */
 /* ================================= */
 
 .leave-table-container {
-
-    overflow-x: auto;
-
+  overflow-x: auto;
 }
-
 
 .leave-table-container table {
+  width: 100%;
 
-    width: 100%;
-
-    border-collapse: collapse;
-
+  border-collapse: collapse;
 }
-
 
 .leave-table-container th,
 .leave-table-container td {
+  padding: 13px;
 
-    padding: 13px;
+  border-bottom: 1px solid #e2e8f0;
 
-    border-bottom: 1px solid #e2e8f0;
-
-    text-align: left;
-
+  text-align: left;
 }
-
 
 .leave-table-container th {
+  background: #f1f5f9;
 
-    background: #f1f5f9;
-
-    color: #334155;
-
+  color: #334155;
 }
-
 
 .leave-table-container td {
-
-    color: #475569;
-
+  color: #475569;
 }
-
-
 
 /* ================================= */
 /* STATUS BADGES */
 /* ================================= */
 
 .status-badge {
+  display: inline-block;
 
-    display: inline-block;
+  padding: 5px 10px;
 
-    padding: 5px 10px;
+  border-radius: 20px;
 
-    border-radius: 20px;
+  font-size: 12px;
 
-    font-size: 12px;
-
-    font-weight: 600;
-
+  font-weight: 600;
 }
-
 
 .status-pending {
+  background: #fef3c7;
 
-    background: #fef3c7;
-
-    color: #92400e;
-
+  color: #92400e;
 }
-
 
 .status-approved {
+  background: #dcfce7;
 
-    background: #dcfce7;
-
-    color: #166534;
-
+  color: #166534;
 }
-
 
 .status-rejected {
+  background: #fee2e2;
 
-    background: #fee2e2;
-
-    color: #991b1b;
-
+  color: #991b1b;
 }
-
 
 .status-cancelled {
+  background: #e2e8f0;
 
-    background: #e2e8f0;
-
-    color: #475569;
-
+  color: #475569;
 }
-
-
 
 /* ================================= */
 /* RESPONSIVE */
 /* ================================= */
 
 @media (max-width: 900px) {
+  .profile-grid {
+    grid-template-columns: repeat(2, 1fr);
+  }
 
-    .profile-grid {
-
-        grid-template-columns:
-            repeat(2, 1fr);
-
-    }
-
-
-    .report-grid {
-
-        grid-template-columns:
-            repeat(2, 1fr);
-
-    }
-
+  .report-grid {
+    grid-template-columns: repeat(2, 1fr);
+  }
 }
-
 
 @media (max-width: 700px) {
+  .profile-header {
+    padding: 20px;
 
-    .profile-header {
+    flex-direction: column;
 
-        padding: 20px;
+    align-items: flex-start;
 
-        flex-direction: column;
+    gap: 15px;
+  }
 
-        align-items: flex-start;
+  .header-actions {
+    flex-wrap: wrap;
+  }
 
-        gap: 15px;
+  .profile-grid {
+    grid-template-columns: 1fr;
+  }
 
-    }
+  .report-grid {
+    grid-template-columns: 1fr;
+  }
 
+  .leave-form-grid {
+    grid-template-columns: 1fr;
+  }
 
-    .header-actions {
-
-        flex-wrap: wrap;
-
-    }
-
-
-    .profile-grid {
-
-        grid-template-columns: 1fr;
-
-    }
-
-
-    .report-grid {
-
-        grid-template-columns: 1fr;
-
-    }
-
-
-    .leave-form-grid {
-
-        grid-template-columns: 1fr;
-
-    }
-
-
-    .full-width {
-
-        grid-column: auto;
-
-    }
-
+  .full-width {
+    grid-column: auto;
+  }
 }
-
-
 
 /* ================================= */
 /* PRINT */
 /* ================================= */
 
 @media print {
+  .profile-header {
+    box-shadow: none;
+  }
 
-    .profile-header {
+  .header-actions,
+  .leave-section {
+    display: none;
+  }
 
-        box-shadow: none;
+  .profile-container {
+    margin: 0;
 
-    }
+    max-width: none;
+  }
 
+  .profile-section,
+  .reports-section,
+  .my-leaves-section {
+    box-shadow: none;
 
-    .header-actions,
-    .leave-section {
+    border: 1px solid #ddd;
 
-        display: none;
-
-    }
-
-
-    .profile-container {
-
-        margin: 0;
-
-        max-width: none;
-
-    }
-
-
-    .profile-section,
-    .reports-section,
-    .my-leaves-section {
-
-        box-shadow: none;
-
-        border: 1px solid #ddd;
-
-        break-inside: avoid;
-
-    }
-
+    break-inside: avoid;
+  }
 }
