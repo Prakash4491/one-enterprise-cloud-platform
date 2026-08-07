@@ -2,227 +2,130 @@
 // REGISTRATION FORM
 // ===========================
 
-const registrationForm =
-    document.getElementById("registrationForm");
-
+const registrationForm = document.getElementById("registrationForm");
 
 // ===========================
 // REGISTER EMPLOYEE
 // ===========================
 
-registrationForm.addEventListener(
-    "submit",
-    function (event) {
+registrationForm.addEventListener("submit", function (event) {
+  event.preventDefault();
 
-        event.preventDefault();
+  // ===========================
+  // LOAD EXISTING EMPLOYEES
+  // ===========================
 
+  let employees = JSON.parse(localStorage.getItem("employees")) || [];
 
-        // ===========================
-        // LOAD EXISTING EMPLOYEES
-        // ===========================
+  // ===========================
+  // GET FORM VALUES
+  // ===========================
 
-        let employees =
-            JSON.parse(
-                localStorage.getItem("employees")
-            ) || [];
+  const employeeId = document.getElementById("employeeId").value.trim();
 
+  const fullName = document.getElementById("fullName").value.trim();
 
-        // ===========================
-        // GET FORM VALUES
-        // ===========================
+  const email = document.getElementById("email").value.trim();
 
-        const employeeId =
-            document
-                .getElementById("employeeId")
-                .value
-                .trim();
+  const mobile = document.getElementById("mobile").value.trim();
 
+  const department = document.getElementById("department").value;
 
-        const fullName =
-            document
-                .getElementById("fullName")
-                .value
-                .trim();
+  const designation = document.getElementById("designation").value.trim();
 
+  const joiningDate = document.getElementById("joiningDate").value;
 
-        const email =
-            document
-                .getElementById("email")
-                .value
-                .trim();
+  const password = document.getElementById("password").value;
 
+  const confirmPassword = document.getElementById("confirmPassword").value;
 
-        const mobile =
-            document
-                .getElementById("mobile")
-                .value
-                .trim();
+  // ===========================
+  // PASSWORD VALIDATION
+  // ===========================
 
+  if (password !== confirmPassword) {
+    alert("Passwords do not match.");
 
-        const department =
-            document
-                .getElementById("department")
-                .value;
+    return;
+  }
 
+  // ===========================
+  // DUPLICATE EMPLOYEE ID
+  // ===========================
 
-        const designation =
-            document
-                .getElementById("designation")
-                .value
-                .trim();
+  const existingEmployee = employees.find(function (employee) {
+    return employee.id.toLowerCase() === employeeId.toLowerCase();
+  });
 
+  if (existingEmployee) {
+    alert("Employee ID already exists.");
 
-        const joiningDate =
-            document
-                .getElementById("joiningDate")
-                .value;
+    return;
+  }
 
+  // ===========================
+  // DUPLICATE EMAIL
+  // ===========================
 
-        const password =
-            document
-                .getElementById("password")
-                .value;
+  const existingEmail = employees.find(function (employee) {
+    return employee.email.toLowerCase() === email.toLowerCase();
+  });
 
+  if (existingEmail) {
+    alert("Email already registered.");
 
-        const confirmPassword =
-            document
-                .getElementById("confirmPassword")
-                .value;
+    return;
+  }
 
+  // ===========================
+  // CREATE EMPLOYEE OBJECT
+  // ===========================
 
-        // ===========================
-        // PASSWORD VALIDATION
-        // ===========================
+  const employee = {
+    id: employeeId,
 
-        if (password !== confirmPassword) {
+    name: fullName,
 
-            alert(
-                "Passwords do not match."
-            );
+    email: email,
 
-            return;
+    mobile: mobile,
 
-        }
+    department: department,
 
+    designation: designation,
 
-        // ===========================
-        // DUPLICATE EMPLOYEE ID
-        // ===========================
+    joiningDate: joiningDate,
 
-        const existingEmployee =
-            employees.find(
-                function (employee) {
+    password: password,
 
-                    return (
-                        employee.id.toLowerCase() ===
-                        employeeId.toLowerCase()
-                    );
+    status: "Active",
 
-                }
-            );
+    attendance: "",
 
+    image: "assets/images/employee.png",
+  };
 
-        if (existingEmployee) {
+  // ===========================
+  // ADD EMPLOYEE
+  // ===========================
 
-            alert(
-                "Employee ID already exists."
-            );
+  employees.push(employee);
 
-            return;
+  // ===========================
+  // SAVE
+  // ===========================
 
-        }
+  localStorage.setItem("employees", JSON.stringify(employees));
 
+  // ===========================
+  // SUCCESS MESSAGE
+  // ===========================
 
-        // ===========================
-        // DUPLICATE EMAIL
-        // ===========================
+  alert("Employee Registered Successfully!");
 
-        const existingEmail =
-            employees.find(
-                function (employee) {
+  // ===========================
+  // RESET FORM
+  // ===========================
 
-                    return (
-                        employee.email.toLowerCase() ===
-                        email.toLowerCase()
-                    );
-
-                }
-            );
-
-
-        if (existingEmail) {
-
-            alert(
-                "Email already registered."
-            );
-
-            return;
-
-        }
-
-
-        // ===========================
-        // CREATE EMPLOYEE OBJECT
-        // ===========================
-
-        const employee = {
-
-            id: employeeId,
-
-            name: fullName,
-
-            email: email,
-
-            mobile: mobile,
-
-            department: department,
-
-            designation: designation,
-
-            joiningDate: joiningDate,
-
-            password: password,
-
-            status: "Active",
-
-            attendance: "",
-
-            image: "assets/images/employee.png"
-
-        };
-
-
-        // ===========================
-        // ADD EMPLOYEE
-        // ===========================
-
-        employees.push(employee);
-
-
-        // ===========================
-        // SAVE
-        // ===========================
-
-        localStorage.setItem(
-            "employees",
-            JSON.stringify(employees)
-        );
-
-
-        // ===========================
-        // SUCCESS MESSAGE
-        // ===========================
-
-        alert(
-            "Employee Registered Successfully!"
-        );
-
-
-        // ===========================
-        // RESET FORM
-        // ===========================
-
-        registrationForm.reset();
-
-    }
-);
+  registrationForm.reset();
+});

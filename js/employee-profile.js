@@ -1,760 +1,291 @@
-// =====================================================
-// EMPLOYEE PROFILE - COMPLETE JS
-// =====================================================
-
-
-// =====================================================
-// ACCESS CHECK
-// =====================================================
-
 if (localStorage.getItem("loggedInRole") !== "employee") {
+  alert("Employee access required.");
 
-    alert("Employee access required.");
-
-    window.location.href = "login.html";
-
+  window.location.href = "login.html";
 }
 
+const loggedInEmployee = JSON.parse(localStorage.getItem("loggedInEmployee"));
 
-// =====================================================
-// GET LOGGED-IN EMPLOYEE
-// =====================================================
-
-const loggedInEmployee =
-    JSON.parse(
-        localStorage.getItem("loggedInEmployee")
-    );
-
-
-// =====================================================
-// LOAD LATEST EMPLOYEE DATA
-// =====================================================
-
-const employees =
-    JSON.parse(
-        localStorage.getItem("employees")
-    ) || [];
-
-
-// IMPORTANT:
-// Do NOT use the old loggedInEmployee object directly.
-// Find the latest version from employees.
+const employees = JSON.parse(localStorage.getItem("employees")) || [];
 
 let employee = null;
 
 if (loggedInEmployee) {
-
-    employee = employees.find(function (emp) {
-
-        return emp.id === loggedInEmployee.id;
-
-    });
-
+  employee = employees.find(function (emp) {
+    return emp.id === loggedInEmployee.id;
+  });
 }
-
-
-// =====================================================
-// EMPLOYEE NOT FOUND
-// =====================================================
 
 if (!employee) {
+  alert("Employee information not found.");
 
-    alert("Employee information not found.");
+  localStorage.removeItem("loggedInEmployee");
 
-    localStorage.removeItem("loggedInEmployee");
-
-    window.location.href = "login.html";
-
+  window.location.href = "login.html";
 }
 
+const employeeId = document.getElementById("employeeId");
+const employeeName = document.getElementById("employeeName");
+const employeeEmail = document.getElementById("employeeEmail");
+const employeeMobile = document.getElementById("employeeMobile");
+const employeeDepartment = document.getElementById("employeeDepartment");
+const employeeDesignation = document.getElementById("employeeDesignation");
+const employeeJoiningDate = document.getElementById("employeeJoiningDate");
+const attendancePercentage = document.getElementById("attendancePercentage");
+const leaveBalance = document.getElementById("leaveBalance");
+const totalWorkingDays = document.getElementById("totalWorkingDays");
+const presentDays = document.getElementById("presentDays");
+const leaveDays = document.getElementById("leaveDays");
+const reportAttendancePercentage = document.getElementById(
+  "reportAttendancePercentage",
+);
 
-// =====================================================
-// HTML ELEMENTS
-// =====================================================
+const leaveForm = document.getElementById("leaveForm");
 
-const employeeId =
-    document.getElementById("employeeId");
+const leaveMessage = document.getElementById("leaveMessage");
 
-const employeeName =
-    document.getElementById("employeeName");
-
-const employeeEmail =
-    document.getElementById("employeeEmail");
-
-const employeeMobile =
-    document.getElementById("employeeMobile");
-
-const employeeDepartment =
-    document.getElementById("employeeDepartment");
-
-const employeeDesignation =
-    document.getElementById("employeeDesignation");
-
-const employeeJoiningDate =
-    document.getElementById("employeeJoiningDate");
-
-const attendancePercentage =
-    document.getElementById("attendancePercentage");
-
-const leaveBalance =
-    document.getElementById("leaveBalance");
-
-
-// Reports
-
-const totalWorkingDays =
-    document.getElementById("totalWorkingDays");
-
-const presentDays =
-    document.getElementById("presentDays");
-
-const leaveDays =
-    document.getElementById("leaveDays");
-
-const reportAttendancePercentage =
-    document.getElementById(
-        "reportAttendancePercentage"
-    );
-
-
-// Leave
-
-const leaveForm =
-    document.getElementById("leaveForm");
-
-const leaveMessage =
-    document.getElementById("leaveMessage");
-
-const myLeaveTableBody =
-    document.getElementById(
-        "myLeaveTableBody"
-    );
-
+const myLeaveTableBody = document.getElementById("myLeaveTableBody");
 
 // Logout
 
-const logoutBtn =
-    document.getElementById("logoutBtn");
-
-
-// =====================================================
-// DISPLAY EMPLOYEE PROFILE
-// =====================================================
+const logoutBtn = document.getElementById("logoutBtn");
 
 function displayEmployeeProfile() {
-
-    employeeId.innerText =
-        employee.id || "-";
-
-    employeeName.innerText =
-        employee.name || "-";
-
-    employeeEmail.innerText =
-        employee.email || "-";
-
-    employeeMobile.innerText =
-        employee.mobile || "-";
-
-    employeeDepartment.innerText =
-        employee.department || "-";
-
-    employeeDesignation.innerText =
-        employee.designation || "-";
-
-    employeeJoiningDate.innerText =
-        employee.joiningDate || "-";
-
+  employeeId.innerText = employee.id || "-";
+  employeeName.innerText = employee.name || "-";
+  employeeEmail.innerText = employee.email || "-";
+  employeeMobile.innerText = employee.mobile || "-";
+  employeeDepartment.innerText = employee.department || "-";
+  employeeDesignation.innerText = employee.designation || "-";
+  employeeJoiningDate.innerText = employee.joiningDate || "-";
 }
-
-
-// =====================================================
-// DATE HELPERS
-// =====================================================
 
 function getTodayDate() {
+  const today = new Date();
 
-    const today = new Date();
+  const year = today.getFullYear();
 
-    const year =
-        today.getFullYear();
+  const month = String(today.getMonth() + 1).padStart(2, "0");
 
-    const month =
-        String(
-            today.getMonth() + 1
-        ).padStart(2, "0");
+  const day = String(today.getDate()).padStart(2, "0");
 
-    const day =
-        String(
-            today.getDate()
-        ).padStart(2, "0");
-
-    return `${year}-${month}-${day}`;
-
+  return `${year}-${month}-${day}`;
 }
-
-
-// =====================================================
-// CALCULATE WORKING DAYS
-// FROM JOINING DATE TO TODAY
-// EXCLUDING SATURDAY & SUNDAY
-// =====================================================
 
 function calculateWorkingDays() {
+  if (!employee.joiningDate) {
+    return 0;
+  }
 
-    if (!employee.joiningDate) {
+  const startDate = new Date(employee.joiningDate + "T00:00:00");
 
-        return 0;
+  const today = new Date();
 
+  today.setHours(0, 0, 0, 0);
+
+  if (startDate > today) {
+    return 0;
+  }
+
+  let workingDays = 0;
+
+  const currentDate = new Date(startDate);
+
+  while (currentDate <= today) {
+    const day = currentDate.getDay();
+
+    if (day !== 0 && day !== 6) {
+      workingDays++;
     }
 
+    currentDate.setDate(currentDate.getDate() + 1);
+  }
 
-    const startDate =
-        new Date(
-            employee.joiningDate +
-            "T00:00:00"
-        );
-
-    const today =
-        new Date();
-
-
-    // Remove time
-
-    today.setHours(
-        0,
-        0,
-        0,
-        0
-    );
-
-
-    // If joining date is in future
-
-    if (startDate > today) {
-
-        return 0;
-
-    }
-
-
-    let workingDays = 0;
-
-    const currentDate =
-        new Date(startDate);
-
-
-    while (
-        currentDate <= today
-    ) {
-
-        const day =
-            currentDate.getDay();
-
-
-        // Sunday = 0
-        // Saturday = 6
-
-        if (
-            day !== 0 &&
-            day !== 6
-        ) {
-
-            workingDays++;
-
-        }
-
-
-        currentDate.setDate(
-            currentDate.getDate() + 1
-        );
-
-    }
-
-
-    return workingDays;
-
+  return workingDays;
 }
-
-
-// =====================================================
-// GET APPROVED LEAVE REQUESTS
-// =====================================================
 
 function getEmployeeLeaves() {
+  const leaves = JSON.parse(localStorage.getItem("leaveRequests")) || [];
 
-    const leaves =
-        JSON.parse(
-            localStorage.getItem("leaveRequests")
-        ) || [];
-
-
-    return leaves.filter(
-        function (leave) {
-
-            return (
-
-                leave.employeeId ===
-                employee.id
-
-            );
-
-        }
-    );
-
+  return leaves.filter(function (leave) {
+    return leave.employeeId === employee.id;
+  });
 }
-
-
-// =====================================================
-// CALCULATE CURRENT MONTH LEAVE DAYS
-// =====================================================
 
 function calculateCurrentMonthLeaveDays() {
+  const leaves = getEmployeeLeaves();
 
-    const leaves =
-        getEmployeeLeaves();
+  const today = new Date();
 
+  const currentYear = today.getFullYear();
 
-    const today =
-        new Date();
+  const currentMonth = today.getMonth();
 
+  let usedLeaveDays = 0;
 
-    const currentYear =
-        today.getFullYear();
+  leaves.forEach(function (leave) {
+    if (leave.status !== "Approved") {
+      return;
+    }
 
-    const currentMonth =
-        today.getMonth();
+    const from = new Date(leave.fromDate + "T00:00:00");
 
+    const to = new Date(leave.toDate + "T00:00:00");
 
-    let usedLeaveDays = 0;
+    if (
+      from.getFullYear() !== currentYear ||
+      from.getMonth() !== currentMonth
+    ) {
+      return;
+    }
 
+    let current = new Date(from);
 
-    leaves.forEach(
-        function (leave) {
+    while (current <= to) {
+      const day = current.getDay();
 
-            // Only approved leaves
+      if (day !== 0 && day !== 6) {
+        usedLeaveDays++;
+      }
 
-            if (
-                leave.status !==
-                "Approved"
-            ) {
+      current.setDate(current.getDate() + 1);
+    }
+  });
 
-                return;
-
-            }
-
-
-            const from =
-                new Date(
-                    leave.fromDate +
-                    "T00:00:00"
-                );
-
-            const to =
-                new Date(
-                    leave.toDate +
-                    "T00:00:00"
-                );
-
-
-            // Check whether the leave
-            // belongs to current month
-
-            if (
-                from.getFullYear() !==
-                currentYear
-                ||
-                from.getMonth() !==
-                currentMonth
-            ) {
-
-                return;
-
-            }
-
-
-            let current =
-                new Date(from);
-
-
-            while (
-                current <= to
-            ) {
-
-                const day =
-                    current.getDay();
-
-
-                // Count only weekdays
-
-                if (
-                    day !== 0 &&
-                    day !== 6
-                ) {
-
-                    usedLeaveDays++;
-
-                }
-
-
-                current.setDate(
-                    current.getDate() + 1
-                );
-
-            }
-
-        }
-    );
-
-
-    return usedLeaveDays;
-
+  return usedLeaveDays;
 }
-
-
-// =====================================================
-// LEAVE BALANCE
-// MONTHLY ALLOWANCE = 2 DAYS
-// =====================================================
 
 function calculateLeaveBalance() {
+  const monthlyLeaveAllowance = 2;
 
-    const monthlyLeaveAllowance = 2;
+  const usedLeaveDays = calculateCurrentMonthLeaveDays();
 
+  const balance = Math.max(0, monthlyLeaveAllowance - usedLeaveDays);
 
-    const usedLeaveDays =
-        calculateCurrentMonthLeaveDays();
-
-
-    const balance =
-        Math.max(
-            0,
-            monthlyLeaveAllowance -
-            usedLeaveDays
-        );
-
-
-    return balance;
-
+  return balance;
 }
-
-
-// =====================================================
-// GET TODAY'S ATTENDANCE
-// =====================================================
 
 function getTodayAttendance() {
+  const today = getTodayDate();
 
-    const today =
-        getTodayDate();
+  if (employee.attendanceHistory && Array.isArray(employee.attendanceHistory)) {
+    const todayRecord = employee.attendanceHistory.find(function (record) {
+      return record.date === today;
+    });
 
-
-    // New attendance history format
-
-    if (
-        employee.attendanceHistory
-        &&
-        Array.isArray(
-            employee.attendanceHistory
-        )
-    ) {
-
-        const todayRecord =
-            employee.attendanceHistory.find(
-                function (record) {
-
-                    return (
-                        record.date ===
-                        today
-                    );
-
-                }
-            );
-
-
-        if (todayRecord) {
-
-            return todayRecord.status;
-
-        }
-
+    if (todayRecord) {
+      return todayRecord.status;
     }
+  }
 
+  if (employee.attendanceDate === today) {
+    return employee.attendance;
+  }
 
-    // Current attendance format
-    // Used by your existing admin attendance page
-
-    if (
-        employee.attendanceDate ===
-        today
-    ) {
-
-        return employee.attendance;
-
-    }
-
-
-    return null;
-
+  return null;
 }
-
-
-// =====================================================
-// CALCULATE PRESENT DAYS
-// =====================================================
 
 function calculatePresentDays() {
+  let present = 0;
 
-    let present = 0;
-
-
-    // -------------------------------------------------
-    // NEW FORMAT
-    // -------------------------------------------------
-
-    if (
-        employee.attendanceHistory
-        &&
-        Array.isArray(
-            employee.attendanceHistory
-        )
-    ) {
-
-        employee.attendanceHistory.forEach(
-            function (record) {
-
-                if (
-                    record.status ===
-                    "Present"
-                ) {
-
-                    present++;
-
-                }
-
-            }
-        );
-
-
-        return present;
-
-    }
-
-
-    // -------------------------------------------------
-    // EXISTING FORMAT
-    // -------------------------------------------------
-
-    const todayAttendance =
-        getTodayAttendance();
-
-
-    if (
-        todayAttendance ===
-        "Present"
-    ) {
-
-        present = 1;
-
-    }
-
+  if (employee.attendanceHistory && Array.isArray(employee.attendanceHistory)) {
+    employee.attendanceHistory.forEach(function (record) {
+      if (record.status === "Present") {
+        present++;
+      }
+    });
 
     return present;
+  }
 
+  const todayAttendance = getTodayAttendance();
+
+  if (todayAttendance === "Present") {
+    present = 1;
+  }
+
+  return present;
 }
-
-
-// =====================================================
-// CALCULATE LEAVE DAYS FOR REPORT
-// =====================================================
 
 function calculateLeaveDays() {
+  const leaves = getEmployeeLeaves();
 
-    const leaves =
-        getEmployeeLeaves();
+  let totalLeaveDays = 0;
 
+  leaves.forEach(function (leave) {
+    if (leave.status !== "Approved") {
+      return;
+    }
 
-    let totalLeaveDays = 0;
+    const from = new Date(leave.fromDate + "T00:00:00");
 
+    const to = new Date(leave.toDate + "T00:00:00");
 
-    leaves.forEach(
-        function (leave) {
+    let current = new Date(from);
 
-            if (
-                leave.status !==
-                "Approved"
-            ) {
+    while (current <= to) {
+      const day = current.getDay();
 
-                return;
+      if (day !== 0 && day !== 6) {
+        totalLeaveDays++;
+      }
 
-            }
+      current.setDate(current.getDate() + 1);
+    }
+  });
 
-
-            const from =
-                new Date(
-                    leave.fromDate +
-                    "T00:00:00"
-                );
-
-            const to =
-                new Date(
-                    leave.toDate +
-                    "T00:00:00"
-                );
-
-
-            let current =
-                new Date(from);
-
-
-            while (
-                current <= to
-            ) {
-
-                const day =
-                    current.getDay();
-
-
-                if (
-                    day !== 0 &&
-                    day !== 6
-                ) {
-
-                    totalLeaveDays++;
-
-                }
-
-
-                current.setDate(
-                    current.getDate() + 1
-                );
-
-            }
-
-        }
-    );
-
-
-    return totalLeaveDays;
-
+  return totalLeaveDays;
 }
-
-
-// =====================================================
-// DISPLAY ATTENDANCE & REPORTS
-// =====================================================
 
 function updateReports() {
+  const workingDays = calculateWorkingDays();
 
-    const workingDays =
-        calculateWorkingDays();
+  const present = calculatePresentDays();
 
+  const leave = calculateLeaveDays();
 
-    const present =
-        calculatePresentDays();
+  let percentage = 0;
 
+  if (workingDays > 0) {
+    percentage = Math.round((present / workingDays) * 100);
+  }
 
-    const leave =
-        calculateLeaveDays();
+  if (attendancePercentage) {
+    attendancePercentage.innerText = percentage + "%";
+  }
 
+  if (leaveBalance) {
+    leaveBalance.innerText = calculateLeaveBalance() + " Days";
+  }
 
-    let percentage = 0;
+  if (totalWorkingDays) {
+    totalWorkingDays.innerText = workingDays;
+  }
 
+  if (presentDays) {
+    presentDays.innerText = present;
+  }
 
-    if (workingDays > 0) {
+  if (leaveDays) {
+    leaveDays.innerText = leave;
+  }
 
-        percentage =
-            Math.round(
-                (
-                    present /
-                    workingDays
-                ) * 100
-            );
-
-    }
-
-
-    // ---------------------------------------------
-    // PROFILE SECTION
-    // ---------------------------------------------
-
-    if (attendancePercentage) {
-
-        attendancePercentage.innerText =
-            percentage + "%";
-
-    }
-
-
-    if (leaveBalance) {
-
-        leaveBalance.innerText =
-            calculateLeaveBalance() +
-            " Days";
-
-    }
-
-
-    // ---------------------------------------------
-    // REPORT SECTION
-    // ---------------------------------------------
-
-    if (totalWorkingDays) {
-
-        totalWorkingDays.innerText =
-            workingDays;
-
-    }
-
-
-    if (presentDays) {
-
-        presentDays.innerText =
-            present;
-
-    }
-
-
-    if (leaveDays) {
-
-        leaveDays.innerText =
-            leave;
-
-    }
-
-
-    if (reportAttendancePercentage) {
-
-        reportAttendancePercentage.innerText =
-            percentage + "%";
-
-    }
-
+  if (reportAttendancePercentage) {
+    reportAttendancePercentage.innerText = percentage + "%";
+  }
 }
 
-
-// =====================================================
-// DISPLAY MY LEAVE REQUESTS
-// =====================================================
-
 function displayMyLeaves() {
+  if (!myLeaveTableBody) {
+    return;
+  }
 
-    if (!myLeaveTableBody) {
+  const leaves = getEmployeeLeaves();
 
-        return;
+  myLeaveTableBody.innerHTML = "";
 
-    }
-
-
-    const leaves =
-        getEmployeeLeaves();
-
-
-    myLeaveTableBody.innerHTML = "";
-
-
-    if (leaves.length === 0) {
-
-        myLeaveTableBody.innerHTML = `
+  if (leaves.length === 0) {
+    myLeaveTableBody.innerHTML = `
 
             <tr>
 
@@ -771,45 +302,21 @@ function displayMyLeaves() {
 
         `;
 
-        return;
+    return;
+  }
 
+  leaves.forEach(function (leave) {
+    let statusClass = "";
+
+    if (leave.status === "Approved") {
+      statusClass = "approved";
+    } else if (leave.status === "Rejected") {
+      statusClass = "rejected";
+    } else {
+      statusClass = "pending";
     }
 
-
-    leaves.forEach(
-        function (leave) {
-
-            let statusClass =
-                "";
-
-
-            if (
-                leave.status ===
-                "Approved"
-            ) {
-
-                statusClass =
-                    "approved";
-
-            }
-            else if (
-                leave.status ===
-                "Rejected"
-            ) {
-
-                statusClass =
-                    "rejected";
-
-            }
-            else {
-
-                statusClass =
-                    "pending";
-
-            }
-
-
-            myLeaveTableBody.innerHTML += `
+    myLeaveTableBody.innerHTML += `
 
                 <tr>
 
@@ -842,302 +349,124 @@ function displayMyLeaves() {
                 </tr>
 
             `;
-
-        }
-    );
-
+  });
 }
-
-
-// =====================================================
-// APPLY LEAVE
-// =====================================================
 
 if (leaveForm) {
+  leaveForm.addEventListener("submit", function (event) {
+    event.preventDefault();
 
-    leaveForm.addEventListener(
-        "submit",
-        function (event) {
+    const leaveType = document.getElementById("leaveType").value;
 
-            event.preventDefault();
+    const fromDate = document.getElementById("fromDate").value;
 
+    const toDate = document.getElementById("toDate").value;
 
-            const leaveType =
-                document.getElementById(
-                    "leaveType"
-                ).value;
+    const reason = document.getElementById("leaveReason").value.trim();
 
+    if (new Date(toDate) < new Date(fromDate)) {
+      leaveMessage.innerText = "❌ To Date cannot be before From Date.";
 
-            const fromDate =
-                document.getElementById(
-                    "fromDate"
-                ).value;
+      leaveMessage.style.color = "red";
 
+      return;
+    }
 
-            const toDate =
-                document.getElementById(
-                    "toDate"
-                ).value;
+    let current = new Date(fromDate + "T00:00:00");
 
+    const end = new Date(toDate + "T00:00:00");
 
-            const reason =
-                document.getElementById(
-                    "leaveReason"
-                ).value.trim();
+    let requestedDays = 0;
 
+    while (current <= end) {
+      const day = current.getDay();
 
-            // -----------------------------------------
-            // DATE VALIDATION
-            // -----------------------------------------
+      if (day !== 0 && day !== 6) {
+        requestedDays++;
+      }
 
-            if (
-                new Date(
-                    toDate
-                ) <
-                new Date(
-                    fromDate
-                )
-            ) {
+      current.setDate(current.getDate() + 1);
+    }
 
-                leaveMessage.innerText =
-                    "❌ To Date cannot be before From Date.";
+    const availableLeave = calculateLeaveBalance();
 
-                leaveMessage.style.color =
-                    "red";
+    if (requestedDays > availableLeave) {
+      leaveMessage.innerText =
+        "❌ Leave request exceeds your available monthly leave balance of " +
+        availableLeave +
+        " days.";
 
-                return;
+      leaveMessage.style.color = "red";
 
-            }
+      return;
+    }
 
+    const leaveRequests =
+      JSON.parse(localStorage.getItem("leaveRequests")) || [];
 
-            // -----------------------------------------
-            // CHECK LEAVE BALANCE
-            // -----------------------------------------
+    const leaveRequest = {
+      id: Date.now(),
 
-            let current =
-                new Date(
-                    fromDate +
-                    "T00:00:00"
-                );
+      employeeId: employee.id,
 
-            const end =
-                new Date(
-                    toDate +
-                    "T00:00:00"
-                );
+      employeeName: employee.name,
 
+      department: employee.department,
 
-            let requestedDays = 0;
+      leaveType: leaveType,
 
+      fromDate: fromDate,
 
-            while (
-                current <= end
-            ) {
+      toDate: toDate,
 
-                const day =
-                    current.getDay();
+      reason: reason,
 
+      status: "Pending",
 
-                if (
-                    day !== 0 &&
-                    day !== 6
-                ) {
+      appliedDate: getTodayDate(),
+    };
 
-                    requestedDays++;
+    leaveRequests.push(leaveRequest);
 
-                }
+    localStorage.setItem("leaveRequests", JSON.stringify(leaveRequests));
 
+    leaveMessage.innerText = "✅ Leave request submitted successfully.";
 
-                current.setDate(
-                    current.getDate() + 1
-                );
+    leaveMessage.style.color = "green";
 
-            }
+    leaveForm.reset();
 
+    displayMyLeaves();
 
-            const availableLeave =
-                calculateLeaveBalance();
-
-
-            if (
-                requestedDays >
-                availableLeave
-            ) {
-
-                leaveMessage.innerText =
-                    "❌ Leave request exceeds your available monthly leave balance of " +
-                    availableLeave +
-                    " days.";
-
-                leaveMessage.style.color =
-                    "red";
-
-                return;
-
-            }
-
-
-            // -----------------------------------------
-            // LOAD LEAVE REQUESTS
-            // -----------------------------------------
-
-            const leaveRequests =
-                JSON.parse(
-                    localStorage.getItem(
-                        "leaveRequests"
-                    )
-                ) || [];
-
-
-            // -----------------------------------------
-            // CREATE REQUEST
-            // -----------------------------------------
-
-            const leaveRequest = {
-
-                id:
-                    Date.now(),
-
-                employeeId:
-                    employee.id,
-
-                employeeName:
-                    employee.name,
-
-                department:
-                    employee.department,
-
-                leaveType:
-                    leaveType,
-
-                fromDate:
-                    fromDate,
-
-                toDate:
-                    toDate,
-
-                reason:
-                    reason,
-
-                status:
-                    "Pending",
-
-                appliedDate:
-                    getTodayDate()
-
-            };
-
-
-            leaveRequests.push(
-                leaveRequest
-            );
-
-
-            // -----------------------------------------
-            // SAVE
-            // -----------------------------------------
-
-            localStorage.setItem(
-                "leaveRequests",
-                JSON.stringify(
-                    leaveRequests
-                )
-            );
-
-
-            leaveMessage.innerText =
-                "✅ Leave request submitted successfully.";
-
-            leaveMessage.style.color =
-                "green";
-
-
-            leaveForm.reset();
-
-
-            displayMyLeaves();
-
-            updateReports();
-
-        }
-    );
-
+    updateReports();
+  });
 }
-
-
-// =====================================================
-// LOGOUT
-// =====================================================
 
 if (logoutBtn) {
+  logoutBtn.addEventListener("click", function () {
+    localStorage.removeItem("loggedInRole");
 
-    logoutBtn.addEventListener(
-        "click",
-        function () {
+    localStorage.removeItem("loggedInEmployee");
 
-            localStorage.removeItem(
-                "loggedInRole"
-            );
+    localStorage.removeItem("username");
 
-            localStorage.removeItem(
-                "loggedInEmployee"
-            );
-
-            localStorage.removeItem(
-                "username"
-            );
-
-
-            window.location.href =
-                "login.html";
-
-        }
-    );
-
+    window.location.href = "login.html";
+  });
 }
 
-
-// =====================================================
-// PRINT PROFILE
-// =====================================================
-
-const printBtn =
-    document.getElementById(
-        "printProfileBtn"
-    );
-
+const printBtn = document.getElementById("printProfileBtn");
 
 if (printBtn) {
-
-    printBtn.addEventListener(
-        "click",
-        function () {
-
-            window.print();
-
-        }
-    );
-
+  printBtn.addEventListener("click", function () {
+    window.print();
+  });
 }
 
-
-// =====================================================
-// DOWNLOAD PROFILE
-// =====================================================
-
-const downloadBtn =
-    document.getElementById(
-        "downloadProfileBtn"
-    );
-
+const downloadBtn = document.getElementById("downloadProfileBtn");
 
 if (downloadBtn) {
-
-    downloadBtn.addEventListener(
-        "click",
-        function () {
-
-            const profileText = `
+  downloadBtn.addEventListener("click", function () {
+    const profileText = `
 
 EMPLOYEE PROFILE
 ==============================
@@ -1157,15 +486,10 @@ Working Days      : ${calculateWorkingDays()}
 Present Days      : ${calculatePresentDays()}
 Leave Days        : ${calculateLeaveDays()}
 Attendance        : ${
-    calculateWorkingDays() > 0
-        ? Math.round(
-            (
-                calculatePresentDays() /
-                calculateWorkingDays()
-            ) * 100
-        )
+      calculateWorkingDays() > 0
+        ? Math.round((calculatePresentDays() / calculateWorkingDays()) * 100)
         : 0
-}%
+    }%
 
 
 Leave Balance
@@ -1175,56 +499,23 @@ Remaining Leave  : ${calculateLeaveBalance()} Days
 
             `;
 
+    const blob = new Blob([profileText], {
+      type: "text/plain",
+    });
 
-            const blob =
-                new Blob(
-                    [profileText],
-                    {
-                        type:
-                            "text/plain"
-                    }
-                );
+    const url = URL.createObjectURL(blob);
 
+    const link = document.createElement("a");
 
-            const url =
-                URL.createObjectURL(
-                    blob
-                );
+    link.href = url;
 
+    link.download = employee.id + "-profile.txt";
 
-            const link =
-                document.createElement(
-                    "a"
-                );
+    link.click();
 
-
-            link.href =
-                url;
-
-            link.download =
-                employee.id +
-                "-profile.txt";
-
-
-            link.click();
-
-
-            URL.revokeObjectURL(
-                url
-            );
-
-        }
-    );
-
+    URL.revokeObjectURL(url);
+  });
 }
-
-
-// =====================================================
-// INITIAL LOAD
-// =====================================================
-
 displayEmployeeProfile();
-
 updateReports();
-
 displayMyLeaves();

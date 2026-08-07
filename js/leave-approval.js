@@ -1,127 +1,36 @@
-// ==========================================
-// HR ACCESS CHECK
-// ==========================================
 
-if (
-    localStorage.getItem("loggedInRole") !== "hr"
-) {
+if (localStorage.getItem("loggedInRole") !== "hr") {
+  alert("HR access required.");
 
-    alert("HR access required.");
-
-    window.location.href =
-        "login.html";
-
+  window.location.href = "login.html";
 }
 
+let leaveRequests = JSON.parse(localStorage.getItem("leaveRequests")) || [];
 
-// ==========================================
-// LOAD LEAVE REQUESTS
-// ==========================================
+const leaveTableBody = document.getElementById("leaveTableBody");
+const searchLeave = document.getElementById("searchLeave");
+const departmentFilter = document.getElementById("departmentFilter");
+const statusFilter = document.getElementById("statusFilter");
+const totalRequests = document.getElementById("totalRequests");
+const pendingRequests = document.getElementById("pendingRequests");
+const approvedRequests = document.getElementById("approvedRequests");
+const rejectedRequests = document.getElementById("rejectedRequests");
 
-let leaveRequests =
-    JSON.parse(
-        localStorage.getItem("leaveRequests")
-    ) || [];
+function calculateDays(fromDate, toDate) {
+  const start = new Date(fromDate);
 
+  const end = new Date(toDate);
 
-// ==========================================
-// HTML ELEMENTS
-// ==========================================
+  const difference = end - start;
 
-const leaveTableBody =
-    document.getElementById(
-        "leaveTableBody"
-    );
-
-
-const searchLeave =
-    document.getElementById(
-        "searchLeave"
-    );
-
-
-const departmentFilter =
-    document.getElementById(
-        "departmentFilter"
-    );
-
-
-const statusFilter =
-    document.getElementById(
-        "statusFilter"
-    );
-
-
-const totalRequests =
-    document.getElementById(
-        "totalRequests"
-    );
-
-
-const pendingRequests =
-    document.getElementById(
-        "pendingRequests"
-    );
-
-
-const approvedRequests =
-    document.getElementById(
-        "approvedRequests"
-    );
-
-
-const rejectedRequests =
-    document.getElementById(
-        "rejectedRequests"
-    );
-
-
-// ==========================================
-// CALCULATE TOTAL DAYS
-// ==========================================
-
-function calculateDays(
-    fromDate,
-    toDate
-) {
-
-    const start =
-        new Date(fromDate);
-
-    const end =
-        new Date(toDate);
-
-
-    const difference =
-        end - start;
-
-
-    return (
-        Math.floor(
-            difference /
-            (1000 * 60 * 60 * 24)
-        ) + 1
-    );
-
+  return Math.floor(difference / (1000 * 60 * 60 * 24)) + 1;
 }
 
+function displayLeaveRequests(requestList) {
+  leaveTableBody.innerHTML = "";
 
-// ==========================================
-// DISPLAY LEAVE REQUESTS
-// ==========================================
-
-function displayLeaveRequests(
-    requestList
-) {
-
-    leaveTableBody.innerHTML = "";
-
-
-    if (
-        requestList.length === 0
-    ) {
-
-        leaveTableBody.innerHTML = `
+  if (requestList.length === 0) {
+    leaveTableBody.innerHTML = `
 
             <tr>
 
@@ -138,37 +47,17 @@ function displayLeaveRequests(
 
         `;
 
-        return;
+    return;
+  }
 
-    }
+  requestList.forEach(function (leave) {
+    const days = leave.totalDays || calculateDays(leave.fromDate, leave.toDate);
 
+    const status = leave.status || "Pending";
 
-    requestList.forEach(
-        function (leave) {
+    const statusClass = status.toLowerCase().replace(" ", "-");
 
-            const days =
-                leave.totalDays ||
-                calculateDays(
-                    leave.fromDate,
-                    leave.toDate
-                );
-
-
-            const status =
-                leave.status ||
-                "Pending";
-
-
-            const statusClass =
-                status
-                    .toLowerCase()
-                    .replace(
-                        " ",
-                        "-"
-                    );
-
-
-            leaveTableBody.innerHTML += `
+    leaveTableBody.innerHTML += `
 
                 <tr>
 
@@ -223,9 +112,8 @@ function displayLeaveRequests(
                         >
 
                             ${
-                                status ===
-                                "Pending"
-                                    ? `
+                              status === "Pending"
+                                ? `
 
                                 <button
                                     class="approve-btn"
@@ -242,14 +130,13 @@ function displayLeaveRequests(
                                 </button>
 
                             `
-                                    : ""
+                                : ""
                             }
 
 
                             ${
-                                status !==
-                                    "Cancelled"
-                                    ? `
+                              status !== "Cancelled"
+                                ? `
 
                                 <button
                                     class="cancel-btn"
@@ -259,7 +146,7 @@ function displayLeaveRequests(
                                 </button>
 
                             `
-                                    : ""
+                                : ""
                             }
 
                         </div>
@@ -269,386 +156,134 @@ function displayLeaveRequests(
                 </tr>
 
             `;
-
-        }
-    );
-
+  });
 }
-
-
-// ==========================================
-// SAVE LEAVE REQUESTS
-// ==========================================
 
 function saveLeaveRequests() {
-
-    localStorage.setItem(
-        "leaveRequests",
-        JSON.stringify(
-            leaveRequests
-        )
-    );
-
+  localStorage.setItem("leaveRequests", JSON.stringify(leaveRequests));
 }
-
-
-// ==========================================
-// APPROVE LEAVE
-// ==========================================
 
 function approveLeave(id) {
-
-const leave = leaveRequests.find(function (request) {
+  const leave = leaveRequests.find(function (request) {
     return String(request.id) === String(id);
-});
+  });
 
+  if (!leave) {
+    return;
+  }
 
-    if (!leave) {
+  if (!confirm("Approve this leave request?")) {
+    return;
+  }
 
-        return;
+  leave.status = "Approved";
 
-    }
+  leave.approvedDate = new Date().toLocaleDateString();
 
+  saveLeaveRequests();
 
-    if (
-        !confirm(
-            "Approve this leave request?"
-        )
-    ) {
+  filterLeaveRequests();
 
-        return;
-
-    }
-
-
-    leave.status =
-        "Approved";
-
-
-    leave.approvedDate =
-        new Date()
-            .toLocaleDateString();
-
-
-    saveLeaveRequests();
-
-    filterLeaveRequests();
-
-    alert(
-        "Leave Approved Successfully."
-    );
-
+  alert("Leave Approved Successfully.");
 }
-
-
-// ==========================================
-// REJECT LEAVE
-// ==========================================
 
 function rejectLeave(id) {
-
-const leave = leaveRequests.find(function (request) {
+  const leave = leaveRequests.find(function (request) {
     return String(request.id) === String(id);
-});
+  });
 
+  if (!leave) {
+    return;
+  }
 
-    if (!leave) {
+  if (!confirm("Reject this leave request?")) {
+    return;
+  }
 
-        return;
+  leave.status = "Rejected";
 
-    }
+  leave.rejectedDate = new Date().toLocaleDateString();
 
+  saveLeaveRequests();
 
-    if (
-        !confirm(
-            "Reject this leave request?"
-        )
-    ) {
+  filterLeaveRequests();
 
-        return;
-
-    }
-
-
-    leave.status =
-        "Rejected";
-
-
-    leave.rejectedDate =
-        new Date()
-            .toLocaleDateString();
-
-
-    saveLeaveRequests();
-
-    filterLeaveRequests();
-
-    alert(
-        "Leave Rejected."
-    );
-
+  alert("Leave Rejected.");
 }
-
-
-// ==========================================
-// CANCEL LEAVE
-// ==========================================
 
 function cancelLeave(id) {
-
-const leave = leaveRequests.find(function (request) {
+  const leave = leaveRequests.find(function (request) {
     return String(request.id) === String(id);
-});
+  });
 
+  if (!leave) {
+    return;
+  }
 
-    if (!leave) {
+  if (!confirm("Cancel this leave request?")) {
+    return;
+  }
 
-        return;
+  leave.status = "Cancelled";
 
-    }
+  leave.cancelledDate = new Date().toLocaleDateString();
 
+  saveLeaveRequests();
 
-    if (
-        !confirm(
-            "Cancel this leave request?"
-        )
-    ) {
+  filterLeaveRequests();
 
-        return;
-
-    }
-
-
-    leave.status =
-        "Cancelled";
-
-
-    leave.cancelledDate =
-        new Date()
-            .toLocaleDateString();
-
-
-    saveLeaveRequests();
-
-    filterLeaveRequests();
-
-    alert(
-        "Leave Cancelled."
-    );
-
+  alert("Leave Cancelled.");
 }
-
-
-// ==========================================
-// FILTER
-// ==========================================
 
 function filterLeaveRequests() {
+  const searchValue = searchLeave.value.trim().toLowerCase();
+  const departmentValue = departmentFilter.value;
+  const statusValue = statusFilter.value;
+  const filtered = leaveRequests.filter(function (leave) {
+    const employeeId = (leave.employeeId || "").toLowerCase();
 
-    const searchValue =
-        searchLeave.value
-            .trim()
-            .toLowerCase();
+    const employeeName = (leave.employeeName || "").toLowerCase();
+    const matchesSearch =
+      employeeId.includes(searchValue) || employeeName.includes(searchValue);
+    const matchesDepartment =
+      departmentValue === "All" || leave.department === departmentValue;
+    const matchesStatus =
+      statusValue === "All" || (leave.status || "Pending") === statusValue;
+    return matchesSearch && matchesDepartment && matchesStatus;
+  });
 
+  displayLeaveRequests(filtered);
 
-    const departmentValue =
-        departmentFilter.value;
-
-
-    const statusValue =
-        statusFilter.value;
-
-
-    const filtered =
-        leaveRequests.filter(
-            function (leave) {
-
-                const employeeId =
-                    (
-                        leave.employeeId ||
-                        ""
-                    ).toLowerCase();
-
-
-                const employeeName =
-                    (
-                        leave.employeeName ||
-                        ""
-                    ).toLowerCase();
-
-
-                const matchesSearch =
-
-                    employeeId.includes(
-                        searchValue
-                    )
-
-                    ||
-
-                    employeeName.includes(
-                        searchValue
-                    );
-
-
-                const matchesDepartment =
-
-                    departmentValue ===
-                        "All"
-
-                    ||
-
-                    leave.department ===
-                        departmentValue;
-
-
-                const matchesStatus =
-
-                    statusValue ===
-                        "All"
-
-                    ||
-
-                    (
-                        leave.status ||
-                        "Pending"
-                    ) ===
-                        statusValue;
-
-
-                return (
-
-                    matchesSearch &&
-
-                    matchesDepartment &&
-
-                    matchesStatus
-
-                );
-
-            }
-        );
-
-
-    displayLeaveRequests(
-        filtered
-    );
-
-    updateSummary();
-
+  updateSummary();
 }
-
-
-// ==========================================
-// SUMMARY
-// ==========================================
 
 function updateSummary() {
+  totalRequests.innerText = leaveRequests.length;
 
-    totalRequests.innerText =
-        leaveRequests.length;
+  pendingRequests.innerText = leaveRequests.filter(function (leave) {
+    return (leave.status || "Pending") === "Pending";
+  }).length;
 
+  approvedRequests.innerText = leaveRequests.filter(function (leave) {
+    return leave.status === "Approved";
+  }).length;
 
-    pendingRequests.innerText =
-        leaveRequests.filter(
-            function (leave) {
-
-                return (
-                    (
-                        leave.status ||
-                        "Pending"
-                    ) === "Pending"
-                );
-
-            }
-        ).length;
-
-
-    approvedRequests.innerText =
-        leaveRequests.filter(
-            function (leave) {
-
-                return (
-                    leave.status ===
-                    "Approved"
-                );
-
-            }
-        ).length;
-
-
-    rejectedRequests.innerText =
-        leaveRequests.filter(
-            function (leave) {
-
-                return (
-                    leave.status ===
-                    "Rejected"
-                );
-
-            }
-        ).length;
-
+  rejectedRequests.innerText = leaveRequests.filter(function (leave) {
+    return leave.status === "Rejected";
+  }).length;
 }
 
+searchLeave.addEventListener("keyup", filterLeaveRequests);
+departmentFilter.addEventListener("change", filterLeaveRequests);
+statusFilter.addEventListener("change", filterLeaveRequests);
+document.getElementById("logoutBtn").addEventListener("click", function () {
+  localStorage.removeItem("loggedInRole");
 
-// ==========================================
-// EVENTS
-// ==========================================
+  localStorage.removeItem("loggedInEmployee");
 
-searchLeave.addEventListener(
-    "keyup",
-    filterLeaveRequests
-);
+  localStorage.removeItem("username");
 
-
-departmentFilter.addEventListener(
-    "change",
-    filterLeaveRequests
-);
-
-
-statusFilter.addEventListener(
-    "change",
-    filterLeaveRequests
-);
-
-
-// ==========================================
-// LOGOUT
-// ==========================================
-
-document
-    .getElementById("logoutBtn")
-    .addEventListener(
-        "click",
-        function () {
-
-            localStorage.removeItem(
-                "loggedInRole"
-            );
-
-            localStorage.removeItem(
-                "loggedInEmployee"
-            );
-
-            localStorage.removeItem(
-                "username"
-            );
-
-
-            window.location.href =
-                "login.html";
-
-        }
-    );
-
-
-// ==========================================
-// INITIAL LOAD
-// ==========================================
-
+  window.location.href = "login.html";
+});
 updateSummary();
-
-displayLeaveRequests(
-    leaveRequests
-);
+displayLeaveRequests(leaveRequests);

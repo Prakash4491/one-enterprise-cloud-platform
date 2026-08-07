@@ -1,274 +1,161 @@
-<!DOCTYPE html>
+<!doctype html>
 <html lang="en">
+  <head>
+    <meta charset="UTF-8" />
 
-<head>
-
-    <meta charset="UTF-8">
-
-    <meta
-        name="viewport"
-        content="width=device-width, initial-scale=1.0"
-    >
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
 
     <title>Employee Registration</title>
 
-    <link rel="stylesheet" href="css/style.css">
+    <link rel="stylesheet" href="css/style.css" />
 
-    <link rel="stylesheet" href="css/registration.css">
+    <link rel="stylesheet" href="css/registration.css" />
+  </head>
 
-</head>
-
-
-<body>
-
-
-<div class="container">
-
-    <div class="title-box">
-
+  <body>
+    <div class="container">
+      <div class="title-box">
         <h1>Employee Registration</h1>
 
-        <p>
-            Register a new employee in the
-            One Enterprise Cloud Platform.
-        </p>
-
+        <p>Register a new employee in the One Enterprise Cloud Platform.</p>
 
         <form id="registrationForm">
-
-            <div class="form-grid">
-
-
-                <!-- Employee ID -->
-
-                <div class="input-group">
-
-                    <label for="employeeId">
-                        Employee ID
-                    </label>
-
-                    <input
-                        type="text"
-                        id="employeeId"
-                        placeholder="EMP001"
-                        required
-                    >
-
-                </div>
-
-
-                <!-- Full Name -->
-
-                <div class="input-group">
-
-                    <label for="fullName">
-                        Full Name
-                    </label>
-
-                    <input
-                        type="text"
-                        id="fullName"
-                        placeholder="Enter Full Name"
-                        required
-                    >
-
-                </div>
-
-
-                <!-- Email -->
-
-                <div class="input-group">
-
-                    <label for="email">
-                        Email Address
-                    </label>
-
-                    <input
-                        type="email"
-                        id="email"
-                        placeholder="Enter Email"
-                        required
-                    >
-
-                </div>
-
-
-                <!-- Mobile -->
-
-                <div class="input-group">
-
-                    <label for="mobile">
-                        Mobile Number
-                    </label>
-
-                    <input
-                        type="tel"
-                        id="mobile"
-                        placeholder="Enter Mobile Number"
-                        required
-                    >
-
-                </div>
-
-
-                <!-- Department -->
-
-                <div class="input-group">
-
-                    <label for="department">
-                        Department
-                    </label>
-
-                    <select
-                        id="department"
-                        required
-                    >
-
-                        <option value="">
-                            Select Department
-                        </option>
-
-                        <option value="HR">
-                            HR
-                        </option>
-
-                        <option value="Development">
-                            Development
-                        </option>
-
-                        <option value="Finance">
-                            Finance
-                        </option>
-
-                        <option value="CRM">
-                            CRM
-                        </option>
-
-                        <option value="ERP">
-                            ERP
-                        </option>
-
-                        <option value="Operations">
-                            Operations
-                        </option>
-
-                    </select>
-
-                </div>
-
-
-                <!-- Designation -->
-
-                <div class="input-group">
-
-                    <label for="designation">
-                        Designation
-                    </label>
-
-                    <input
-                        type="text"
-                        id="designation"
-                        placeholder="Enter Designation"
-                        required
-                    >
-
-                </div>
-
-
-                <!-- Joining Date -->
-
-                <div class="input-group">
-
-                    <label for="joiningDate">
-                        Date of Joining
-                    </label>
-
-                    <input
-                        type="date"
-                        id="joiningDate"
-                        required
-                    >
-
-                </div>
-
-
-                <!-- Password -->
-
-                <div class="input-group">
-
-                    <label for="password">
-                        Password
-                    </label>
-
-                    <input
-                        type="password"
-                        id="password"
-                        placeholder="Enter Password"
-                        required
-                    >
-
-                </div>
-
-
-                <!-- Confirm Password -->
-
-                <div class="input-group full-width">
-
-                    <label for="confirmPassword">
-                        Confirm Password
-                    </label>
-
-                    <input
-                        type="password"
-                        id="confirmPassword"
-                        placeholder="Re-Enter Password"
-                        required
-                    >
-
-                </div>
-
+          <div class="form-grid">
+            <!-- Employee ID -->
+
+            <div class="input-group">
+              <label for="employeeId"> Employee ID </label>
+
+              <input
+                type="text"
+                id="employeeId"
+                placeholder="EMP001"
+                required
+              />
             </div>
 
+            <!-- Full Name -->
 
-            <p id="registrationMessage"></p>
+            <div class="input-group">
+              <label for="fullName"> Full Name </label>
 
-
-            <div class="button-group">
-
-                <button
-                    type="submit"
-                    class="register-btn"
-                >
-                    Register
-                </button>
-
-
-                <button
-                    type="reset"
-                    class="reset-btn"
-                >
-                    Reset
-                </button>
-
-
-                <a
-                    href="dashboard.html"
-                    class="home-btn"
-                >
-                    🏠 Dashboard
-                </a>
-
+              <input
+                type="text"
+                id="fullName"
+                placeholder="Enter Full Name"
+                required
+              />
             </div>
 
+            <!-- Email -->
+
+            <div class="input-group">
+              <label for="email"> Email Address </label>
+
+              <input
+                type="email"
+                id="email"
+                placeholder="Enter Email"
+                required
+              />
+            </div>
+
+            <!-- Mobile -->
+
+            <div class="input-group">
+              <label for="mobile"> Mobile Number </label>
+
+              <input
+                type="tel"
+                id="mobile"
+                placeholder="Enter Mobile Number"
+                required
+              />
+            </div>
+
+            <!-- Department -->
+
+            <div class="input-group">
+              <label for="department"> Department </label>
+
+              <select id="department" required>
+                <option value="">Select Department</option>
+
+                <option value="HR">HR</option>
+
+                <option value="Development">Development</option>
+
+                <option value="Finance">Finance</option>
+
+                <option value="CRM">CRM</option>
+
+                <option value="ERP">ERP</option>
+
+                <option value="Operations">Operations</option>
+              </select>
+            </div>
+
+            <!-- Designation -->
+
+            <div class="input-group">
+              <label for="designation"> Designation </label>
+
+              <input
+                type="text"
+                id="designation"
+                placeholder="Enter Designation"
+                required
+              />
+            </div>
+
+            <!-- Joining Date -->
+
+            <div class="input-group">
+              <label for="joiningDate"> Date of Joining </label>
+
+              <input type="date" id="joiningDate" required />
+            </div>
+
+            <!-- Password -->
+
+            <div class="input-group">
+              <label for="password"> Password </label>
+
+              <input
+                type="password"
+                id="password"
+                placeholder="Enter Password"
+                required
+              />
+            </div>
+
+            <!-- Confirm Password -->
+
+            <div class="input-group full-width">
+              <label for="confirmPassword"> Confirm Password </label>
+
+              <input
+                type="password"
+                id="confirmPassword"
+                placeholder="Re-Enter Password"
+                required
+              />
+            </div>
+          </div>
+
+          <p id="registrationMessage"></p>
+
+          <div class="button-group">
+            <button type="submit" class="register-btn">Register</button>
+
+            <button type="reset" class="reset-btn">Reset</button>
+
+            <a href="dashboard.html" class="home-btn"> 🏠 Dashboard </a>
+          </div>
         </form>
-
+      </div>
     </div>
 
-</div>
-
-
-<script src="js/registration.js"></script>
-
-</body>
-
+    <script src="js/registration.js"></script>
+  </body>
 </html>
